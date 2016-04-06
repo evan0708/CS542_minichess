@@ -166,4 +166,4 @@ since the framework consists of several components and each component has indivi
 * `zmq`
 
 ##license
-please refer to the appropriate file within this repository.
+please refer to the appropriate file within this repository.# CS542_minichess
