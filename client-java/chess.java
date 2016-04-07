@@ -1,5 +1,9 @@
 import java.util.Vector;
 
+/**CS542: ADV AI:COMBINATOR GAMES (Spring 2016)
+ * Homework 1
+ * Edited by Shu-Ping Chu
+ */
 public class chess {
     private final static int row = 6;
     private final static int column = 5;

@@ -2,8 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4ee01464-d1dc-43b4-8738-a4950d06c60c" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client-java/client.jar" afterPath="$PROJECT_DIR$/client-java/client.jar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/framework/framework" afterPath="$PROJECT_DIR$/framework/framework" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/prebuilt/linux-x64/framework" afterPath="$PROJECT_DIR$/prebuilt/linux-x64/framework" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client-java/chess.java" afterPath="$PROJECT_DIR$/client-java/chess.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client-java/main.java" afterPath="$PROJECT_DIR$/client-java/main.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/framework/assets/index.html" afterPath="$PROJECT_DIR$/framework/assets/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/framework/main.h" afterPath="$PROJECT_DIR$/framework/main.h" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/framework/test.c" afterPath="$PROJECT_DIR$/framework/test.c" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/framework/webserver.c" afterPath="$PROJECT_DIR$/framework/webserver.c" />
     </list>
     <ignored path="teaching-minichess.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -28,11 +35,11 @@
       <file leaf-file-name="chess.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/client-java/chess.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-3978">
-              <caret line="7" column="25" selection-start-line="7" selection-start-column="25" selection-end-line="7" selection-end-column="25" />
+            <state relative-caret-position="72">
+              <caret line="4" column="25" selection-start-line="4" selection-start-column="25" selection-end-line="4" selection-end-column="25" />
               <folding>
-                <element signature="e#303#304#0" expanded="true" />
-                <element signature="e#326#327#0" expanded="true" />
+                <element signature="e#395#396#0" expanded="true" />
+                <element signature="e#418#419#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -463,7 +470,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="65" y="24" width="1301" height="744" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -569,14 +576,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/client-java/main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="378">
-          <caret line="21" column="14" selection-start-line="21" selection-start-column="14" selection-end-line="21" selection-end-column="14" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/client-java/zeromq.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-977">
@@ -585,13 +584,21 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/client-java/main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="378">
+          <caret line="21" column="14" selection-start-line="21" selection-start-column="14" selection-end-line="21" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/client-java/chess.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-3978">
-          <caret line="7" column="25" selection-start-line="7" selection-start-column="25" selection-end-line="7" selection-end-column="25" />
+        <state relative-caret-position="72">
+          <caret line="4" column="25" selection-start-line="4" selection-start-column="25" selection-end-line="4" selection-end-column="25" />
           <folding>
-            <element signature="e#303#304#0" expanded="true" />
-            <element signature="e#326#327#0" expanded="true" />
+            <element signature="e#395#396#0" expanded="true" />
+            <element signature="e#418#419#0" expanded="true" />
           </folding>
         </state>
       </provider>
