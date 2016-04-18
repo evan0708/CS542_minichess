@@ -1,3 +1,5 @@
+import java.util.Enumeration;
+import java.util.InputMismatchException;
 import java.util.Vector;
 
 /**CS542: ADV AI:COMBINATOR GAMES (Spring 2016)
@@ -8,8 +10,10 @@ public class chess {
     private final static int row = 6;
     private final static int column = 5;
 	private static char [][] board = new char[row][column];
-    private static char nextPlayer;
-    private static int move;
+    private static char nextPlayer;                         // for next player
+    private static int move;                                // for total move
+    private final static String dash = "-";
+    private final static String newLine = "\n";
 
     // New add!! chess constructor
     public chess() {
@@ -21,7 +25,9 @@ public class chess {
         System.out.println(move + " " + nextPlayer);
         for(int i = 0; i < row; ++i) {
             for(int j = 0; j < column; ++j) {
-                System.out.print(board[i][j]);
+                System.out.print("Board[" + i + "][" + j + "]: " + board[i][j] + " ");
+                if (column == j)
+                    System.out.println();
             }
             System.out.println();
         }
@@ -76,8 +82,8 @@ public class chess {
             }
             strOut += "\n";
         }
-        System.out.println("strOut:");
-        System.out.print(strOut);
+        //System.out.println("strOut:");
+        //System.out.print(strOut);
 		return strOut;
 	}
 	/* Split input string "strIn" into 7 parts, and set into the board field */
@@ -98,7 +104,7 @@ public class chess {
 
         //System.out.println("tokens_size:" + tokens.length);
         //System.out.println("tokens[1] size: " + tokens[1].length());
-        System.out.print(strIn);
+        //System.out.print(strIn);
         for (int i = 1; i < tokens.length; ++i) {
             //System.out.println("i: " + i);
             //System.out.println("Start copying: " + tokens[i]);
@@ -140,7 +146,7 @@ public class chess {
 		if (intX < 0) {
 			return false;
 			
-		} else if (intX > 4) {
+		} else if (intX > 5) {
 			return false;
 			
 		}
@@ -148,7 +154,7 @@ public class chess {
 		if (intY < 0) {
 			return false;
 			
-		} else if (intY > 5) {
+		} else if (intY > 4) {
 			return false;
 			
 		}
@@ -265,14 +271,120 @@ public class chess {
 	
 	public static int eval() {
 		// with reference to the state of the game, return the the evaluation score of the side on move - note that positive means an advantage while negative means a disadvantage
-		
-		return 0;
+		String currentBoard = boardGet();
+        //System.out.println("eval() invoked!!");
+        //System.out.println("length:" + currentBoard.length());
+        currentBoard = currentBoard.substring(currentBoard.length() - 36);
+        //System.out.println("currentStr:");
+        //System.out.println(currentBoard);
+        int totalScore = 0;
+        for (char c : currentBoard.toCharArray()) {
+            totalScore += getScoreValue(c);
+        }
+        if ('W' == nextPlayer)
+            ;                         // do nothing
+        else if ('B' == nextPlayer)
+            totalScore = -totalScore; // negate totalScore
+        else {
+            System.err.println("nextPlayer is undefined!! Shouldn't goes here!!");
+            System.exit(0);
+        }
+        //System.out.println("Score:" + totalScore);
+		return totalScore;
 	}
-	
+
+    // Provide each piece score value to eval()
+    public static int getScoreValue(char piece) {
+        // white pieces as capital letters (KQBNRP) and black pieces as small letters (kqbnrp)
+        // Assume white is return positive value, black is return negative value
+        switch (piece) {
+            // for white piece
+            case 'K':        // as King
+                return 100;
+            case 'Q':        // as Queen
+                return 60;
+            case 'R':        // as Rock
+                return 30;
+            case 'B':        // as Bishop
+                return 15;
+            case 'N':        // as Knight
+                return 5;
+            case 'P':        // as Pawn
+                return 1;
+            case 'k':        // as King
+                return -100;
+            case 'q':        // as Queen
+                return -60;
+            case 'r':        // as Rock
+                return -30;
+            case 'b':        // as Bishop
+                return -15;
+            case 'n':        // as Knight
+                return -5;
+            case 'p':        // as Pawn
+                return -1;
+        }
+        return 0;
+    }
+
+    /* Example: Interface position      Implementation index position:[row][column]
+                     abcde [column]              01234 [column]
+              [row]                      [row]
+                6    kqbnr                 0     kqbnr
+                5    ppppp                 1     ppppp
+                4    .....                 2     .....
+                3    .....                 3     .....
+                2    PPPPP                 4     PPPPP
+                1    RNBQK                 5     RNBQK
+
+                [column:a] = [column:0]
+
+                   [column][row] - [column][row] == [row][column] - [row][column]
+                ex:   b      1   -    c      3   == [ 5 ][   1  ] - [ 3 ][   2  ]
+      */
+    public static char rowIndexMap(int x) {
+        switch (x) {
+            case 0:
+                return '6';
+            case 1:
+                return '5';
+            case 2:
+                return '4';
+            case 3:
+                return '3';
+            case 4:
+                return '2';
+            case 5:
+                return '1';
+        }
+        System.err.println("Index error - row!");
+        System.exit(0);
+        return '?';
+    }
+
+    public static char columnIndexMap(int y) {
+        switch (y) {
+            case 0:
+                return 'a';
+            case 1:
+                return 'b';
+            case 2:
+                return 'c';
+            case 3:
+                return 'd';
+            case 4:
+                return 'e';
+        }
+        System.err.println("Index error - column!");
+        System.exit(0);
+        return '?';
+    }
+
 	public static Vector<String> moves() {
-		// with reference to the state of the game and return the possible moves - one example is given below - note that a move has exactly 6 characters
+		// with reference to the state of the game and return the possible moves
+        // - one example is given below - note that a move has exactly 6 characters
 		
-		Vector<String> strOut = new Vector<String>();
+		/*Vector<String> strOut = new Vector<String>();
 		
 		strOut.add("a2-a3\n");
 		strOut.add("b2-b3\n");
@@ -281,9 +393,86 @@ public class chess {
 		strOut.add("e2-e3\n");
 		strOut.add("b1-a3\n");
 		strOut.add("b1-c3\n");
-		
-		return strOut;
+		*/
+
+        Vector<String> strOut = new Vector<String>();
+        Vector<String> kingMoves = new Vector<String>();
+        Vector<String> queenMoves = new Vector<String>();
+        Vector<String> rockMoves = new Vector<String>();
+        Vector<String> bishopMoves = new Vector<String>();
+        Vector<String> knighMoves = new Vector<String>();
+        Vector<String> pawnMoves = new Vector<String>();
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < column; j++) {
+                // If find "Pawn"
+                if('P' == board[i][j]) {// || 'p' == board[i][j]) {
+                    System.out.print(collectPawnMoves(i, j, nextPlayer));
+                    //pawnMoves.add(collectPawnMoves(i, j, nextPlayer));
+                    //Enumeration en = pawnMoves.elements();
+                    //while(en.hasMoreElements())
+                    //    System.out.print(en.nextElement() + " ");
+                }
+            }
+        }
+
+
+
+		return pawnMoves;
 	}
+
+    // white pawn moves one space north, captures diagonally / north
+    // black pawn moves south
+    // promoted to queen once reaching the other end
+    // x: row, y: column
+    public static String collectPawnMoves(int x, int y, char player) {
+        String pawnMoves = "";
+        String pos = convertPosToString(x, y);
+        String extraPos;
+
+
+        // calculate White player
+        if ('W' == player) {
+            // check diagonal upper left if is enemy
+            if (x > 0 && isValid(x-1, y-1) && isEnemy(board[x-1][y-1])) {
+                //System.out.println("Upper left");
+                extraPos = convertPosToString(x-1, y-1);
+                pawnMoves.concat(pos);
+                pawnMoves.concat(dash);
+                pawnMoves.concat(extraPos);
+                pawnMoves.concat(newLine);
+            }
+            // check diagonal upper right if is enemy
+            if (x > 0 && isValid(x-1, y+1) && isEnemy(board[x-1][y+1])) {
+                //System.out.println("Upper right");
+                extraPos = convertPosToString(x-1, y+1);
+                pawnMoves.concat(pos);
+                pawnMoves.concat(dash);
+                pawnMoves.concat(extraPos);
+                pawnMoves.concat(newLine);
+            }
+            // check if upper is nothing
+            if (x > 0 && isValid(x-1, y) && isNothing(board[x-1][y])) {
+                //System.out.println("Up");
+                extraPos = convertPosToString(x-1, y);
+                pawnMoves += pos;
+                pawnMoves += dash;
+                pawnMoves += extraPos;
+                pawnMoves += newLine;
+            }
+        }
+        //System.out.println("pawnMoves:" + pawnMoves);
+        return pawnMoves;
+    }
+
+    public static String convertPosToString(int x, int y) {
+        String s = "";
+        s += columnIndexMap(y);
+        s += rowIndexMap(x);
+        //s += Integer.toString(x);
+        //s += Integer.toString(y);
+
+        return s;
+    }
 	
 	public static Vector<String> movesShuffled() {
 		// with reference to the state of the game, determine the possible moves and shuffle them before returning them - note that you can call the chess.moves() function in here
