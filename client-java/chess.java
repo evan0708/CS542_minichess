@@ -12,8 +12,8 @@ public class chess {
 	private static char [][] board = new char[row][column];
     private static char nextPlayer;                         // for next player
     private static int move;                                // for total move
-    private final static String dash = "-";
-    private final static String newLine = "\n";
+    private final static char dash = '-';
+    private final static char newLine = '\n';
 
     // New add!! chess constructor
     public chess() {
@@ -384,7 +384,7 @@ public class chess {
 		// with reference to the state of the game and return the possible moves
         // - one example is given below - note that a move has exactly 6 characters
 		
-		/*Vector<String> strOut = new Vector<String>();
+		Vector<String> strOut = new Vector<String>();
 		
 		strOut.add("a2-a3\n");
 		strOut.add("b2-b3\n");
@@ -393,29 +393,39 @@ public class chess {
 		strOut.add("e2-e3\n");
 		strOut.add("b1-a3\n");
 		strOut.add("b1-c3\n");
-		*/
 
-        Vector<String> strOut = new Vector<String>();
         Vector<String> kingMoves = new Vector<String>();
         Vector<String> queenMoves = new Vector<String>();
         Vector<String> rockMoves = new Vector<String>();
         Vector<String> bishopMoves = new Vector<String>();
-        Vector<String> knighMoves = new Vector<String>();
+        Vector<String> knightMoves = new Vector<String>();
         Vector<String> pawnMoves = new Vector<String>();
         for (int i = 0; i < row; i++) {
             for (int j = 0; j < column; j++) {
                 // If find "Pawn"
                 if('P' == board[i][j]) {// || 'p' == board[i][j]) {
-                    System.out.print(collectPawnMoves(i, j, nextPlayer));
-                    //pawnMoves.add(collectPawnMoves(i, j, nextPlayer));
-                    //Enumeration en = pawnMoves.elements();
-                    //while(en.hasMoreElements())
-                    //    System.out.print(en.nextElement() + " ");
+                    //System.out.print(collectPawnMoves(i, j, nextPlayer));
+                    pawnMoves.add(collectPawnMoves(i, j, nextPlayer));
+                }
+                if('N' == board[i][j]) {
+                    pawnMoves.add(collectKnightMoves(i, j, nextPlayer));
                 }
             }
         }
-
-
+/*
+        Vector<String> allMoves = new Vector<String>();
+        for(Enumeration e = pawnMoves.elements(); e.hasMoreElements();) {
+            allMoves.addElement((String) e.nextElement());
+        }
+        for(Enumeration e = kingMoves.elements(); e.hasMoreElements();) {
+            allMoves.addElement((String) e.nextElement());
+        }
+*/
+        Enumeration e = pawnMoves.elements();
+        while(e.hasMoreElements())
+            System.out.print(e.nextElement());
+        //String s = "a2-a3\nb2-b3\nc2-c3\nd2-d3\ne2-e3\nb1-a3\nb1-c3\n";
+        //System.out.print("Compare s:\n" +s);
 
 		return pawnMoves;
 	}
@@ -429,47 +439,133 @@ public class chess {
         String pos = convertPosToString(x, y);
         String extraPos;
 
-
-        // calculate White player
+        // calculate White player - toward upper (North)
         if ('W' == player) {
             // check diagonal upper left if is enemy
             if (x > 0 && isValid(x-1, y-1) && isEnemy(board[x-1][y-1])) {
-                //System.out.println("Upper left");
+                System.out.println("White Upper left");
                 extraPos = convertPosToString(x-1, y-1);
-                pawnMoves.concat(pos);
-                pawnMoves.concat(dash);
-                pawnMoves.concat(extraPos);
-                pawnMoves.concat(newLine);
+                pawnMoves += concatValidMovesString(pos, extraPos);
             }
             // check diagonal upper right if is enemy
             if (x > 0 && isValid(x-1, y+1) && isEnemy(board[x-1][y+1])) {
-                //System.out.println("Upper right");
+                System.out.println("White Upper right");
                 extraPos = convertPosToString(x-1, y+1);
-                pawnMoves.concat(pos);
-                pawnMoves.concat(dash);
-                pawnMoves.concat(extraPos);
-                pawnMoves.concat(newLine);
+                pawnMoves += concatValidMovesString(pos, extraPos);
             }
             // check if upper is nothing
             if (x > 0 && isValid(x-1, y) && isNothing(board[x-1][y])) {
-                //System.out.println("Up");
+                System.out.println("White Upper");
                 extraPos = convertPosToString(x-1, y);
-                pawnMoves += pos;
-                pawnMoves += dash;
-                pawnMoves += extraPos;
-                pawnMoves += newLine;
+                pawnMoves += concatValidMovesString(pos, extraPos);
             }
+            if (x == 0)
+                System.out.println("Pawn promote to queen");
         }
+
+        // Calculate Black player - toward lower (South)
+        if ('B' == player) {
+            // check diagonal lower left if is enemy
+            if (x > 0 && isValid(x+1, y-1) && isEnemy(board[x+1][y-1])) {
+                //System.out.println("Black Lower left");
+                extraPos = convertPosToString(x+1, y+1);
+                pawnMoves += concatValidMovesString(pos, extraPos);
+            }
+            // check diagonal upper right if is enemy
+            if (x > 0 && isValid(x+1, y+1) && isEnemy(board[x+1][y+1])) {
+                //System.out.println("Black Lower right");
+                extraPos = convertPosToString(x+1, y+1);
+                pawnMoves += concatValidMovesString(pos, extraPos);
+            }
+            // check if upper is nothing
+            if (x > 0 && isValid(x+1, y) && isNothing(board[x+1][y])) {
+                //System.out.println("Black Lower");
+                extraPos = convertPosToString(x+1, y);
+                pawnMoves += concatValidMovesString(pos, extraPos);
+            }
+            if (x == 0)
+                System.out.println("Pawn promote to queen");
+        }
+
         //System.out.println("pawnMoves:" + pawnMoves);
         return pawnMoves;
     }
 
+    public static String collectKnightMoves(int x, int y, char player) {
+        String knightMoves = "";
+        String pos = convertPosToString(x, y);
+        String extraPos;
+
+        System.out.println("collectKnightMoves");
+        // calculate White player - toward upper (North)
+        if ('W' == player) {
+            // Upper 1st left!
+            if (isValid(x-2, y-1) && !isOwn(board[x-2][y-1])) {
+                //System.out.println("");
+                extraPos = convertPosToString(x-2, y-1);
+                knightMoves += concatValidMovesString(pos, extraPos);
+            }
+            // Upper 2nd left!
+            if (isValid(x-1, y-2) && !isOwn(board[x-1][y-2])) {
+                //System.out.println("");
+                extraPos = convertPosToString(x-1, y-2);
+                knightMoves += concatValidMovesString(pos, extraPos);
+            }
+            // Upper 1st right
+            if (isValid(x-2, y+1) && !isOwn(board[x-2][y+1])) {
+                //System.out.println("");
+                extraPos = convertPosToString(x-2, y+1);
+                knightMoves += concatValidMovesString(pos, extraPos);
+            }
+            // Upper 2nd right
+            if (isValid(x-1, y+2) && !isOwn(board[x-1][y+2])) {
+                //System.out.println("");
+                extraPos = convertPosToString(x-1, y+2);
+                knightMoves += concatValidMovesString(pos, extraPos);
+            }
+            // Lower 1st left
+            if (isValid(x+2, y-1) && !isOwn(board[x+2][y-1])) {
+                //System.out.println("");
+                extraPos = convertPosToString(x+1, y-1);
+                knightMoves += concatValidMovesString(pos, extraPos);
+            }
+            // Lower 2nd left
+            if (isValid(x+1, y-2) && !isOwn(board[x+1][y-2])) {
+                //System.out.println("");
+                extraPos = convertPosToString(x+1, y-2);
+                knightMoves += concatValidMovesString(pos, extraPos);
+            }
+            // Lower 1st right
+            if (isValid(x+2, y+1) && !isOwn(board[x+2][y+1])) {
+                //System.out.println("");
+                extraPos = convertPosToString(x+2, y+1);
+                knightMoves += concatValidMovesString(pos, extraPos);
+            }
+            // Lower 2nd right
+            if (isValid(x+1, y+2) && !isOwn(board[x+1][y+2])) {
+                //System.out.println("");
+                extraPos = convertPosToString(x+1, y+2);
+                knightMoves += concatValidMovesString(pos, extraPos);
+            }
+        }
+        return knightMoves;
+    }
+
+    // Concat all of possible moves string
+    public static String concatValidMovesString(String pos, String extraPos) {
+        String moves = "";
+        moves += pos;
+        moves += dash;
+        moves += extraPos;
+        moves += newLine;
+        return moves;
+    }
+
+    // Covert current position to interface position as a string, column first then row!
     public static String convertPosToString(int x, int y) {
         String s = "";
         s += columnIndexMap(y);
         s += rowIndexMap(x);
-        //s += Integer.toString(x);
-        //s += Integer.toString(y);
 
         return s;
     }
