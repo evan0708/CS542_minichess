@@ -20,7 +20,18 @@ public class main {
             System.out.println(ex);
             */
             test.reset();
-            //test.moves();
+                          //abcde
+            String strIn = "1 W\n" +
+                           "kqbnr\n" + //6
+                           "ppppp\n" + //5
+                           ".....\n" + //4
+                           ".....\n" + //3
+                           "PPPPP\n" + //2
+                           "RNBQK\n";  //1
+            test.boardSet(strIn);
+            System.out.println("               a               b               c               d               e");
+            test.display_board_state();
+            test.moves();
             //test.display_board_state();
             //System.out.println("Test eval()");
             //System.out.println("Socre:" + test.eval());

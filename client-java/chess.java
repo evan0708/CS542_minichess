@@ -22,12 +22,15 @@ public class chess {
 
     // New add!!
     public static void display_board_state() {
-        System.out.println(move + " " + nextPlayer);
+        System.out.println("  " + move + " " + nextPlayer);
+        int k = row + 1;
         for(int i = 0; i < row; ++i) {
+            System.out.print(k -= 1);
             for(int j = 0; j < column; ++j) {
-                System.out.print("Board[" + i + "][" + j + "]: " + board[i][j] + " ");
-                if (column == j)
+                System.out.print(" Board[" + i + "][" + j + "]: " + board[i][j] + " ");
+                if (column == j) {
                     System.out.println();
+                }
             }
             System.out.println();
         }
@@ -141,8 +144,29 @@ public class chess {
         else
             return '?';
 	}
-	
-	public static boolean isValid(int intX, int intY) {
+
+    public static boolean isValid(int intX, int intY) {
+        if (intX < 0) {
+            return false;
+
+        } else if (intX > 4) {
+            return false;
+
+        }
+
+        if (intY < 0) {
+            return false;
+
+        } else if (intY > 5) {
+            return false;
+
+        }
+
+        return true;
+    }
+
+    // Check if the implementation board index is correct
+	public static boolean isImptPosValid(int intX, int intY) {
 		if (intX < 0) {
 			return false;
 			
@@ -400,64 +424,97 @@ public class chess {
         Vector<String> bishopMoves = new Vector<String>();
         Vector<String> knightMoves = new Vector<String>();
         Vector<String> pawnMoves = new Vector<String>();
+
+        Vector<String> allMoves = new Vector<String>();
+
         for (int i = 0; i < row; i++) {
             for (int j = 0; j < column; j++) {
-                // If find "Pawn"
-                if('P' == board[i][j]) {// || 'p' == board[i][j]) {
-                    //System.out.print(collectPawnMoves(i, j, nextPlayer));
-                    pawnMoves.add(collectPawnMoves(i, j, nextPlayer));
+                if ('W' == nextPlayer) {
+                    if('P' == board[i][j]) {
+                        pawnMoves.addAll(collectPawnMoves(i, j, nextPlayer));
+                    }
+                    if('N' == board[i][j]) {
+                        knightMoves.addAll(collectKnightMoves(i, j, nextPlayer));
+                    }
+                    if('R' == board[i][j]) {
+                        rockMoves.addAll(collectRockMoves(i, j, nextPlayer));
+                    }
+                    if('B' == board[i][j]) {
+                        bishopMoves.addAll(collectBishopMoves(i, j, nextPlayer));
+                    }
+                    if('Q' == board[i][j]) {
+                        queenMoves.addAll(collectQueenMoves(i, j, nextPlayer));
+                    }
+                    if('K' == board[i][j]) {
+                        kingMoves.addAll(collectKingMoves(i, j, nextPlayer));
+                    }
                 }
-                if('N' == board[i][j]) {
-                    pawnMoves.add(collectKnightMoves(i, j, nextPlayer));
+                if ('B' == nextPlayer) {
+                    if('p' == board[i][j]) {
+                        pawnMoves.addAll(collectPawnMoves(i, j, nextPlayer));
+                    }
+                    if('n' == board[i][j]) {
+                        knightMoves.addAll(collectKnightMoves(i, j, nextPlayer));
+                    }
+                    if('r' == board[i][j]) {
+                        rockMoves.addAll(collectRockMoves(i, j, nextPlayer));
+                    }
+                    if('b' == board[i][j]) {
+                        bishopMoves.addAll(collectBishopMoves(i, j, nextPlayer));
+                    }
+                    if('q' == board[i][j]) {
+                        queenMoves.addAll(collectQueenMoves(i, j, nextPlayer));
+                    }
+                    if('k' == board[i][j]) {
+                        kingMoves.addAll(collectKingMoves(i, j, nextPlayer));
+                    }
                 }
+
             }
         }
-/*
-        Vector<String> allMoves = new Vector<String>();
-        for(Enumeration e = pawnMoves.elements(); e.hasMoreElements();) {
-            allMoves.addElement((String) e.nextElement());
-        }
-        for(Enumeration e = kingMoves.elements(); e.hasMoreElements();) {
-            allMoves.addElement((String) e.nextElement());
-        }
-*/
-        Enumeration e = pawnMoves.elements();
+        allMoves.addAll(pawnMoves);
+        allMoves.addAll(knightMoves);
+        allMoves.addAll(rockMoves);
+        allMoves.addAll(bishopMoves);
+        allMoves.addAll(queenMoves);
+        allMoves.addAll(kingMoves);
+
+        Enumeration e = allMoves.elements();
         while(e.hasMoreElements())
             System.out.print(e.nextElement());
-        //String s = "a2-a3\nb2-b3\nc2-c3\nd2-d3\ne2-e3\nb1-a3\nb1-c3\n";
-        //System.out.print("Compare s:\n" +s);
 
-		return pawnMoves;
+		return allMoves;
 	}
 
     // white pawn moves one space north, captures diagonally / north
     // black pawn moves south
     // promoted to queen once reaching the other end
     // x: row, y: column
-    public static String collectPawnMoves(int x, int y, char player) {
-        String pawnMoves = "";
+    public static Vector<String> collectPawnMoves(int x, int y, char player) {
+        Vector<String> pawnMoves = new Vector<String>();
         String pos = convertPosToString(x, y);
         String extraPos;
 
+        System.out.println("collectPawnMoves");
         // calculate White player - toward upper (North)
         if ('W' == player) {
             // check diagonal upper left if is enemy
-            if (x > 0 && isValid(x-1, y-1) && isEnemy(board[x-1][y-1])) {
-                System.out.println("White Upper left");
+            if (x > 0 && isImptPosValid(x-1, y-1) && isEnemy(board[x-1][y-1])) {
+                //System.out.println("White Upper left");
                 extraPos = convertPosToString(x-1, y-1);
-                pawnMoves += concatValidMovesString(pos, extraPos);
+                pawnMoves.add(concatValidMovesString(pos, extraPos));
             }
             // check diagonal upper right if is enemy
-            if (x > 0 && isValid(x-1, y+1) && isEnemy(board[x-1][y+1])) {
-                System.out.println("White Upper right");
+            if (x > 0 && isImptPosValid(x-1, y+1) && isEnemy(board[x-1][y+1])) {
+                //System.out.println("White Upper right");
                 extraPos = convertPosToString(x-1, y+1);
-                pawnMoves += concatValidMovesString(pos, extraPos);
+                pawnMoves.add(concatValidMovesString(pos, extraPos));
             }
             // check if upper is nothing
-            if (x > 0 && isValid(x-1, y) && isNothing(board[x-1][y])) {
-                System.out.println("White Upper");
+            if (x > 0 && isImptPosValid(x-1, y) && isNothing(board[x-1][y])) {
+                //System.out.println("White Upper");
                 extraPos = convertPosToString(x-1, y);
-                pawnMoves += concatValidMovesString(pos, extraPos);
+                pawnMoves.add(concatValidMovesString(pos, extraPos));
             }
             if (x == 0)
                 System.out.println("Pawn promote to queen");
@@ -466,91 +523,426 @@ public class chess {
         // Calculate Black player - toward lower (South)
         if ('B' == player) {
             // check diagonal lower left if is enemy
-            if (x > 0 && isValid(x+1, y-1) && isEnemy(board[x+1][y-1])) {
+            if (x > 0 && isImptPosValid(x+1, y-1) && isEnemy(board[x+1][y-1])) {
                 //System.out.println("Black Lower left");
-                extraPos = convertPosToString(x+1, y+1);
-                pawnMoves += concatValidMovesString(pos, extraPos);
+                extraPos = convertPosToString(x+1, y-1);
+                pawnMoves.add(concatValidMovesString(pos, extraPos));
             }
             // check diagonal upper right if is enemy
-            if (x > 0 && isValid(x+1, y+1) && isEnemy(board[x+1][y+1])) {
+            if (x > 0 && isImptPosValid(x+1, y+1) && isEnemy(board[x+1][y+1])) {
                 //System.out.println("Black Lower right");
                 extraPos = convertPosToString(x+1, y+1);
-                pawnMoves += concatValidMovesString(pos, extraPos);
+                pawnMoves.add(concatValidMovesString(pos, extraPos));
             }
             // check if upper is nothing
-            if (x > 0 && isValid(x+1, y) && isNothing(board[x+1][y])) {
+            if (x > 0 && isImptPosValid(x+1, y) && isNothing(board[x+1][y])) {
                 //System.out.println("Black Lower");
                 extraPos = convertPosToString(x+1, y);
-                pawnMoves += concatValidMovesString(pos, extraPos);
+                pawnMoves.add(concatValidMovesString(pos, extraPos));
             }
             if (x == 0)
                 System.out.println("Pawn promote to queen");
         }
-
+        //Enumeration e = pawnMoves.elements();
+        //while(e.hasMoreElements())
+        //   System.out.print(e.nextElement());
         //System.out.println("pawnMoves:" + pawnMoves);
         return pawnMoves;
     }
 
-    public static String collectKnightMoves(int x, int y, char player) {
-        String knightMoves = "";
+    public static Vector<String> collectKnightMoves(int x, int y, char player) {
+        Vector<String> knightMoves = new Vector<String>();
         String pos = convertPosToString(x, y);
         String extraPos;
 
         System.out.println("collectKnightMoves");
-        // calculate White player - toward upper (North)
-        if ('W' == player) {
-            // Upper 1st left!
-            if (isValid(x-2, y-1) && !isOwn(board[x-2][y-1])) {
-                //System.out.println("");
-                extraPos = convertPosToString(x-2, y-1);
-                knightMoves += concatValidMovesString(pos, extraPos);
-            }
-            // Upper 2nd left!
-            if (isValid(x-1, y-2) && !isOwn(board[x-1][y-2])) {
-                //System.out.println("");
-                extraPos = convertPosToString(x-1, y-2);
-                knightMoves += concatValidMovesString(pos, extraPos);
-            }
-            // Upper 1st right
-            if (isValid(x-2, y+1) && !isOwn(board[x-2][y+1])) {
-                //System.out.println("");
-                extraPos = convertPosToString(x-2, y+1);
-                knightMoves += concatValidMovesString(pos, extraPos);
-            }
-            // Upper 2nd right
-            if (isValid(x-1, y+2) && !isOwn(board[x-1][y+2])) {
-                //System.out.println("");
-                extraPos = convertPosToString(x-1, y+2);
-                knightMoves += concatValidMovesString(pos, extraPos);
-            }
-            // Lower 1st left
-            if (isValid(x+2, y-1) && !isOwn(board[x+2][y-1])) {
-                //System.out.println("");
-                extraPos = convertPosToString(x+1, y-1);
-                knightMoves += concatValidMovesString(pos, extraPos);
-            }
-            // Lower 2nd left
-            if (isValid(x+1, y-2) && !isOwn(board[x+1][y-2])) {
-                //System.out.println("");
-                extraPos = convertPosToString(x+1, y-2);
-                knightMoves += concatValidMovesString(pos, extraPos);
-            }
-            // Lower 1st right
-            if (isValid(x+2, y+1) && !isOwn(board[x+2][y+1])) {
-                //System.out.println("");
-                extraPos = convertPosToString(x+2, y+1);
-                knightMoves += concatValidMovesString(pos, extraPos);
-            }
-            // Lower 2nd right
-            if (isValid(x+1, y+2) && !isOwn(board[x+1][y+2])) {
-                //System.out.println("");
-                extraPos = convertPosToString(x+1, y+2);
-                knightMoves += concatValidMovesString(pos, extraPos);
-            }
+        // Upper 1st left!
+        if (isImptPosValid(x-2, y-1) && !isOwn(board[x-2][y-1])) {
+            //System.out.println("");
+            extraPos = convertPosToString(x-2, y-1);
+            knightMoves.add(concatValidMovesString(pos, extraPos));
+        }
+        // Upper 2nd left!
+        if (isImptPosValid(x-1, y-2) && !isOwn(board[x-1][y-2])) {
+            //System.out.println("");
+            extraPos = convertPosToString(x-1, y-2);
+            knightMoves.add(concatValidMovesString(pos, extraPos));
+        }
+        // Upper 1st right
+        if (isImptPosValid(x-2, y+1) && !isOwn(board[x-2][y+1])) {
+            //System.out.println("");
+            extraPos = convertPosToString(x-2, y+1);
+            knightMoves.add(concatValidMovesString(pos, extraPos));
+        }
+        // Upper 2nd right
+        if (isImptPosValid(x-1, y+2) && !isOwn(board[x-1][y+2])) {
+            //System.out.println("");
+            extraPos = convertPosToString(x-1, y+2);
+            knightMoves.add(concatValidMovesString(pos, extraPos));
+        }
+        // Lower 1st left
+        if (isImptPosValid(x+2, y-1) && !isOwn(board[x+2][y-1])) {
+            //System.out.println("");
+            extraPos = convertPosToString(x+2, y-1);
+            knightMoves.add(concatValidMovesString(pos, extraPos));
+        }
+        // Lower 2nd left
+        if (isImptPosValid(x+1, y-2) && !isOwn(board[x+1][y-2])) {
+            //System.out.println("");
+            extraPos = convertPosToString(x+1, y-2);
+            knightMoves.add(concatValidMovesString(pos, extraPos));
+        }
+        // Lower 1st right
+        if (isImptPosValid(x+2, y+1) && !isOwn(board[x+2][y+1])) {
+            //System.out.println("");
+            extraPos = convertPosToString(x+2, y+1);
+            knightMoves.add(concatValidMovesString(pos, extraPos));
+        }
+        // Lower 2nd right
+        if (isImptPosValid(x+1, y+2) && !isOwn(board[x+1][y+2])) {
+            //System.out.println("");
+            extraPos = convertPosToString(x+1, y+2);
+            knightMoves.add(concatValidMovesString(pos, extraPos));
         }
         return knightMoves;
     }
 
+    public static Vector<String> collectRockMoves(int x, int y, char player) {
+        Vector<String> rockMoves = new Vector<String>();
+        String pos = convertPosToString(x, y);
+        String extraPos;
+
+        boolean stopLookNorth = false;
+        boolean stopLookSouth = false;
+        boolean stopLookWest = false;
+        boolean stopLookEast = false;
+
+        System.out.println("collectRockMoves");
+        // All direction
+        //System.out.println("X: " + x + "Y: " + y);
+        for (int i = 1; i < 6; i++) {
+            // North
+            if (isImptPosValid(x-i, y)) {
+                if (isOwn(board[x-i][y])) {
+                    //System.out.println("Find own army!!");
+                    stopLookNorth = true;
+                }
+                if (false == stopLookNorth && !isOwn(board[x-i][y])) {
+                    //System.out.println("North rock ++1");
+                    if(isEnemy(board[x-i][y]))
+                        stopLookNorth = true;
+                    extraPos = convertPosToString(x-i, y);
+                    rockMoves.add(concatValidMovesString(pos, extraPos));
+                }
+            }
+            // South
+            if (isImptPosValid(x+i, y)) {
+                if (isOwn(board[x+i][y]))
+                    stopLookSouth = true;
+                if (false == stopLookSouth && !isOwn(board[x+i][y])) {
+                    if(isEnemy(board[x+i][y]))
+                        stopLookSouth = true;
+                    extraPos = convertPosToString(x+i, y);
+                    rockMoves.add(concatValidMovesString(pos, extraPos));
+                }
+            }
+            // West
+            if (isImptPosValid(x, y-i)) {
+                if (isOwn(board[x][y-i]))
+                    stopLookWest = true;
+                if (false == stopLookWest && !isOwn(board[x][y-i])) {
+                    if(isEnemy(board[x][y-i]))
+                        stopLookWest = true;
+                    extraPos = convertPosToString(x, y-i);
+                    rockMoves.add(concatValidMovesString(pos, extraPos));
+                }
+            }
+            // East
+            if (isImptPosValid(x, y+i)) {
+                if (isOwn(board[x][y+i]))
+                    stopLookEast = true;
+                if (false == stopLookEast && !isOwn(board[x][y+i])) {
+                    if(isEnemy(board[x][y+i]))
+                        stopLookEast = true;
+                    extraPos = convertPosToString(x, y+i);
+                    rockMoves.add(concatValidMovesString(pos, extraPos));
+                }
+            }
+        }
+        return rockMoves;
+    }
+
+    public static Vector<String> collectBishopMoves(int x, int y, char player) {
+        Vector<String> bishopMoves = new Vector<String>();
+        String pos = convertPosToString(x, y);
+        String extraPos;
+
+        boolean stopLookNorth = false;
+        boolean stopLookNW = false;
+        boolean stopLookNE = false;
+        boolean stopLookSouth = false;
+        boolean stopLookSW = false;
+        boolean stopLookSE = false;
+        boolean stopLookWest = false;
+        boolean stopLookEast = false;
+
+        System.out.println("collectBishopMoves");
+
+        // Go diagonally
+        for (int i = 1; i < 5; i++) {
+            // North West
+            if (isImptPosValid(x-i, y-i)) {
+                if (isOwn(board[x-i][y-i]))
+                    stopLookNW = true;
+                if (false == stopLookNW && !isOwn(board[x-i][y-i])) {
+                    if(isEnemy(board[x-i][y-i]))
+                        stopLookNW = true;
+                    extraPos = convertPosToString(x-i, y-i);
+                    bishopMoves.add(concatValidMovesString(pos, extraPos));
+                }
+            }
+            // North East
+            if (isImptPosValid(x-i, y+i)) {
+                if (isOwn(board[x-i][y+i]))
+                    stopLookNE = true;
+                if (false == stopLookNE && !isOwn(board[x-i][y+i])) {
+                    if(isEnemy(board[x-i][y+i]))
+                        stopLookNE = true;
+                    extraPos = convertPosToString(x-i, y+i);
+                    bishopMoves.add(concatValidMovesString(pos, extraPos));
+                }
+            }
+            // South West
+            if (isImptPosValid(x+i, y-i)) {
+                if (isOwn(board[x+i][y-i]))
+                    stopLookSW = true;
+                if (false == stopLookSW && !isOwn(board[x+i][y-i])) {
+                    if(isEnemy(board[x+i][y-i]))
+                        stopLookSW = true;
+                    extraPos = convertPosToString(x+i, y-i);
+                    bishopMoves.add(concatValidMovesString(pos, extraPos));
+                }
+            }
+            // South East
+            if (isImptPosValid(x+i, y+i)) {
+                if (isOwn(board[x+i][y+i]))
+                    stopLookSE = true;
+                if (false == stopLookSE && !isOwn(board[x+i][y+i])) {
+                    if(isEnemy(board[x+i][y+i]))
+                        stopLookSE = true;
+                    extraPos = convertPosToString(x+i, y+i);
+                    bishopMoves.add(concatValidMovesString(pos, extraPos));
+                }
+            }
+        }
+
+        // Change floor color for only one step
+        // North
+        if (isImptPosValid(x-1, y)) {
+            if (isOwn(board[x-1][y]))
+                stopLookNorth = true;
+            if (false == stopLookNorth && isNothing(board[x-1][y])) {
+                extraPos = convertPosToString(x-1, y);
+                bishopMoves.add(concatValidMovesString(pos, extraPos));
+            }
+        }
+        // South
+        if (isImptPosValid(x+1, y)) {
+            if (isOwn(board[x+1][y]))
+                stopLookSouth = true;
+            if (false == stopLookSouth && isNothing(board[x+1][y])) {
+                extraPos = convertPosToString(x+1, y);
+                bishopMoves.add(concatValidMovesString(pos, extraPos));
+            }
+        }
+        // West
+        if (isImptPosValid(x, y-1)) {
+            if (isOwn(board[x][y-1]))
+                stopLookWest = true;
+            if (false == stopLookWest && isNothing(board[x][y-1])) {
+                extraPos = convertPosToString(x, y-1);
+                bishopMoves.add(concatValidMovesString(pos, extraPos));
+            }
+        }
+        // East
+        if (isImptPosValid(x, y+1)) {
+            if (isOwn(board[x][y+1]))
+                stopLookEast = true;
+            if (false == stopLookEast && isNothing(board[x][y+1])) {
+                extraPos = convertPosToString(x, y+1);
+                bishopMoves.add(concatValidMovesString(pos, extraPos));
+            }
+        }
+        return bishopMoves;
+    }
+
+    public static Vector<String> collectQueenMoves(int x, int y, char player) {
+        Vector<String> queenMoves = new Vector<String>();
+        String pos = convertPosToString(x, y);
+        String extraPos;
+
+        boolean stopLookNorth = false;
+        boolean stopLookNW = false;
+        boolean stopLookNE = false;
+        boolean stopLookSouth = false;
+        boolean stopLookSW = false;
+        boolean stopLookSE = false;
+        boolean stopLookWest = false;
+        boolean stopLookEast = false;
+
+        System.out.println("collectQueenMoves");
+
+        // Go diagonally
+        for (int i = 1; i < 5; i++) {
+            // North West
+            if (isImptPosValid(x-i, y-i)) {
+                if (isOwn(board[x-i][y-i]))
+                    stopLookNW = true;
+                if (false == stopLookNW && !isOwn(board[x-i][y-i])) {
+                    if(isEnemy(board[x-i][y-i]))
+                        stopLookNW = true;
+                    extraPos = convertPosToString(x-i, y-i);
+                    queenMoves.add(concatValidMovesString(pos, extraPos));
+                }
+            }
+            // North East
+            if (isImptPosValid(x-i, y+i)) {
+                if (isOwn(board[x-i][y+i]))
+                    stopLookNE = true;
+                if (false == stopLookNE && !isOwn(board[x-i][y+i])) {
+                    if(isEnemy(board[x-i][y+i]))
+                        stopLookNE = true;
+                    extraPos = convertPosToString(x-i, y+i);
+                    queenMoves.add(concatValidMovesString(pos, extraPos));
+                }
+            }
+            // South West
+            if (isImptPosValid(x+i, y-i)) {
+                if (isOwn(board[x+i][y-i]))
+                    stopLookSW = true;
+                if (false == stopLookSW && !isOwn(board[x+i][y-i])) {
+                    if(isEnemy(board[x+i][y-i]))
+                        stopLookSW = true;
+                    extraPos = convertPosToString(x+i, y-i);
+                    queenMoves.add(concatValidMovesString(pos, extraPos));
+                }
+            }
+            // South East
+            if (isImptPosValid(x+i, y+i)) {
+                if (isOwn(board[x+i][y+i]))
+                    stopLookSE = true;
+                if (false == stopLookSE && !isOwn(board[x+i][y+i])) {
+                    if(isEnemy(board[x+i][y+i]))
+                        stopLookSE = true;
+                    extraPos = convertPosToString(x+i, y+i);
+                    queenMoves.add(concatValidMovesString(pos, extraPos));
+                }
+            }
+        }
+
+        // Go vertical and horizontal
+        for (int i = 1; i < 6; i++) {
+            // North
+            if (isImptPosValid(x-i, y)) {
+                if (isOwn(board[x-i][y])) {
+                    //System.out.println("Find own army!!");
+                    stopLookNorth = true;
+                }
+                if (false == stopLookNorth && !isOwn(board[x-i][y])) {
+                    //System.out.println("North rock ++1");
+                    if(isEnemy(board[x-i][y]))
+                        stopLookNorth = true;
+                    extraPos = convertPosToString(x-i, y);
+                    queenMoves.add(concatValidMovesString(pos, extraPos));
+                }
+            }
+            // South
+            if (isImptPosValid(x+i, y)) {
+                if (isOwn(board[x+i][y]))
+                    stopLookSouth = true;
+                if (false == stopLookSouth && !isOwn(board[x+i][y])) {
+                    if(isEnemy(board[x+i][y]))
+                        stopLookSouth = true;
+                    extraPos = convertPosToString(x+i, y);
+                    queenMoves.add(concatValidMovesString(pos, extraPos));
+                }
+            }
+            // West
+            if (isImptPosValid(x, y-i)) {
+                if (isOwn(board[x][y-i]))
+                    stopLookWest = true;
+                if (false == stopLookWest && !isOwn(board[x][y-i])) {
+                    if(isEnemy(board[x][y-i]))
+                        stopLookWest = true;
+                    extraPos = convertPosToString(x, y-i);
+                    queenMoves.add(concatValidMovesString(pos, extraPos));
+                }
+            }
+            // East
+            if (isImptPosValid(x, y+i)) {
+                if (isOwn(board[x][y+i]))
+                    stopLookEast = true;
+                if (false == stopLookEast && !isOwn(board[x][y+i])) {
+                    if(isEnemy(board[x][y+i]))
+                        stopLookEast = true;
+                    extraPos = convertPosToString(x, y+i);
+                    queenMoves.add(concatValidMovesString(pos, extraPos));
+                }
+            }
+        }
+        return queenMoves;
+    }
+
+    public static Vector<String> collectKingMoves(int x, int y, char player) {
+        Vector<String> kingMoves = new Vector<String>();
+        String pos = convertPosToString(x, y);
+        String extraPos;
+
+        // Go diagonally
+        // North West
+        if (isImptPosValid(x-1, y-1) && !isOwn(board[x-1][y-1])) {
+            extraPos = convertPosToString(x-1, y-1);
+            kingMoves.add(concatValidMovesString(pos, extraPos));
+        }
+        // North East
+        if (isImptPosValid(x-1, y+1) && !isOwn(board[x-1][y+1])) {
+            extraPos = convertPosToString(x-1, y+1);
+            kingMoves.add(concatValidMovesString(pos, extraPos));
+        }
+        // South West
+        if (isImptPosValid(x+1, y-1) && !isOwn(board[x+1][y-1])) {
+            extraPos = convertPosToString(x+1, y-1);
+            kingMoves.add(concatValidMovesString(pos, extraPos));
+        }
+        // South East
+        if (isImptPosValid(x+1, y+1) && !isOwn(board[x+1][y+1])) {
+            extraPos = convertPosToString(x+1, y+1);
+            kingMoves.add(concatValidMovesString(pos, extraPos));
+        }
+
+        // Go vertical or horizontal
+        // North
+        if (isImptPosValid(x-1, y) && !isOwn(board[x-1][y])) {
+                extraPos = convertPosToString(x-1, y);
+                kingMoves.add(concatValidMovesString(pos, extraPos));
+        }
+        // South
+        if (isImptPosValid(x+1, y) && !isOwn(board[x+1][y])) {
+                extraPos = convertPosToString(x+1, y);
+                kingMoves.add(concatValidMovesString(pos, extraPos));
+        }
+        // West
+        if (isImptPosValid(x, y-1) && !isOwn(board[x][y-1])) {
+                extraPos = convertPosToString(x, y-1);
+                kingMoves.add(concatValidMovesString(pos, extraPos));
+        }
+        // East
+        if (isImptPosValid(x, y+1) && !isOwn(board[x][y+1])) {
+                extraPos = convertPosToString(x, y+1);
+                kingMoves.add(concatValidMovesString(pos, extraPos));
+        }
+        return kingMoves;
+    }
     // Concat all of possible moves string
     public static String concatValidMovesString(String pos, String extraPos) {
         String moves = "";
