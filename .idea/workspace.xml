@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="4ee01464-d1dc-43b4-8738-a4950d06c60c" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client-java/client.jar" afterPath="$PROJECT_DIR$/client-java/client.jar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client-java/chess.java" afterPath="$PROJECT_DIR$/client-java/chess.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client-java/main.java" afterPath="$PROJECT_DIR$/client-java/main.java" />
     </list>
@@ -29,8 +30,8 @@
       <file leaf-file-name="chess.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/client-java/chess.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-10938">
-              <caret line="165" column="5" selection-start-line="165" selection-start-column="5" selection-end-line="165" selection-end-column="5" />
+            <state relative-caret-position="388">
+              <caret line="1002" column="27" selection-start-line="1002" selection-start-column="27" selection-end-line="1002" selection-end-column="27" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#646#647#0" expanded="true" />
@@ -57,8 +58,8 @@
       <file leaf-file-name="main.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/client-java/main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="522">
-              <caret line="29" column="33" selection-start-line="29" selection-start-column="33" selection-end-line="29" selection-end-column="33" />
+            <state relative-caret-position="180">
+              <caret line="31" column="36" selection-start-line="31" selection-start-column="36" selection-end-line="31" selection-end-column="36" />
               <folding />
             </state>
           </provider>
@@ -90,8 +91,8 @@
         <option value="$PROJECT_DIR$/client-java/client/main.java" />
         <option value="$PROJECT_DIR$/client-java/teaching/main.java" />
         <option value="$PROJECT_DIR$/framework/test.c" />
-        <option value="$PROJECT_DIR$/client-java/main.java" />
         <option value="$PROJECT_DIR$/client-java/chess.java" />
+        <option value="$PROJECT_DIR$/client-java/main.java" />
       </list>
     </option>
   </component>
@@ -875,14 +876,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/client-java/main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="522">
-          <caret line="29" column="33" selection-start-line="29" selection-start-column="33" selection-end-line="29" selection-end-column="33" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/framework/test.c">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="726">
@@ -891,10 +884,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/client-java/main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="31" column="36" selection-start-line="31" selection-start-column="36" selection-end-line="31" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/client-java/chess.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-10938">
-          <caret line="165" column="5" selection-start-line="165" selection-start-column="5" selection-end-line="165" selection-end-column="5" />
+        <state relative-caret-position="388">
+          <caret line="1002" column="27" selection-start-line="1002" selection-start-column="27" selection-end-line="1002" selection-end-column="27" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#646#647#0" expanded="true" />

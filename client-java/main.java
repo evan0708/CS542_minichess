@@ -23,15 +23,19 @@ public class main {
                           //abcde
             String strIn = "1 W\n" +
                            "kqbnr\n" + //6
-                           "ppppp\n" + //5
+                           "Ppppp\n" + //5
                            ".....\n" + //4
                            ".....\n" + //3
-                           "PPPPP\n" + //2
+                           ".PPPP\n" + //2
                            "RNBQK\n";  //1
             test.boardSet(strIn);
             System.out.println("               a               b               c               d               e");
             test.display_board_state();
             test.moves();
+            test.move("a5-a6\n");
+            test.display_board_state();
+            test.move("b5-b3");
+            test.display_board_state();
             //test.display_board_state();
             //System.out.println("Test eval()");
             //System.out.println("Socre:" + test.eval());

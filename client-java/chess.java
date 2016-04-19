@@ -975,8 +975,75 @@ public class chess {
 	}
 	
 	public static void move(String charIn) {
-		// perform the supplied move (for example "a5-a4\n") and update the state of the game / your internal variables accordingly - note that it advised to do a sanity check of the supplied move
+		// perform the supplied move (for example "a5-a4\n") and update the state of the game / your internal variables accordingly
+        // - note that it advised to do a sanity check of the supplied move
+        int srcColumn = mapColumnToIndex(charIn.charAt(0));
+        int srcRow = mapRowToIndex(charIn.charAt(1));
+        int destColumn = mapColumnToIndex(charIn.charAt(3));
+        int destRow = mapRowToIndex(charIn.charAt(4));
+
+        System.out.println("a5-a4 -> [" + srcRow + "][" + srcColumn +"][" + destRow + "][" + destColumn + "]");
+
+        // Start update chess board
+        char currentPiece = board[srcRow][srcColumn];
+        board[srcRow][srcColumn] = '.';
+        //System.out.println("Current piece: " + currentPiece);
+
+        if ('W' == nextPlayer) {
+            if ('P' == currentPiece && 0 == destRow)
+                board[destRow][destColumn] = 'Q';
+            else
+                board[destRow][destColumn] = currentPiece;
+            nextPlayer = 'B';
+        } else {
+            if ('p' == currentPiece && 5 == destRow)
+                board[destRow][destColumn] = 'q';
+            else
+                board[destRow][destColumn] = currentPiece;
+            nextPlayer = 'W';
+            move += 1;
+        }
+
 	}
+
+    public static int mapColumnToIndex(char y) {
+        switch (y) {
+            case 'a':
+                return 0;
+            case 'b':
+                return 1;
+            case 'c':
+                return 2;
+            case 'd':
+                return 3;
+            case 'e':
+                return 4;
+        }
+        System.err.println("Index error - column!");
+        System.exit(0);
+        return '?';
+    }
+
+    public static int mapRowToIndex(char x) {
+        switch (x) {
+            case '6':
+                return 0;
+            case '5':
+                return 1;
+            case '4':
+                return 2;
+            case '3':
+                return 3;
+            case '2':
+                return 4;
+            case '1':
+                return 5;
+        }
+        System.err.println("Index error - row!");
+        System.exit(0);
+        return '?';
+    }
+
 	
 	public static String moveRandom() {
 		// perform a random move and return it - one example output is given below - note that you can call the chess.movesShuffled() function as well as the chess.move() function in here
