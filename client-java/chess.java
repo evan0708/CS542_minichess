@@ -1,5 +1,6 @@
 import java.util.Enumeration;
 import java.util.InputMismatchException;
+import java.util.Stack;
 import java.util.Vector;
 
 /**CS542: ADV AI:COMBINATOR GAMES (Spring 2016)
@@ -14,6 +15,8 @@ public class chess {
     private static int move;                                // for total move
     private final static char dash = '-';
     private final static char newLine = '\n';
+    private static Stack<String> storedMove = new Stack<String>();
+    private static Stack<Character> storedPiece = new Stack<Character>();
 
     // New add!! chess constructor
     public chess() {
@@ -982,13 +985,19 @@ public class chess {
         int destColumn = mapColumnToIndex(charIn.charAt(3));
         int destRow = mapRowToIndex(charIn.charAt(4));
 
-        System.out.println("a5-a4 -> [" + srcRow + "][" + srcColumn +"][" + destRow + "][" + destColumn + "]");
+        //System.out.println("a5-a4 -> [" + srcRow + "][" + srcColumn +"][" + destRow + "][" + destColumn + "]");
 
-        // Start update chess board
+        // Start update chess board - store current position piece
         char currentPiece = board[srcRow][srcColumn];
+
+        // Set to empty
         board[srcRow][srcColumn] = '.';
         //System.out.println("Current piece: " + currentPiece);
 
+        // Store dest piece first for undo, before perform new move
+        storedPiece.push(board[destRow][destColumn]);
+
+        // Perform move
         if ('W' == nextPlayer) {
             if ('P' == currentPiece && 0 == destRow)
                 board[destRow][destColumn] = 'Q';
@@ -1004,6 +1013,8 @@ public class chess {
             move += 1;
         }
 
+        // Store each move
+        storedMove.push(charIn);
 	}
 
     public static int mapColumnToIndex(char y) {
@@ -1070,6 +1081,30 @@ public class chess {
 	}
 	
 	public static void undo() {
-		// undo the last move and update the state of the game / your internal variables accordingly - note that you need to maintain an internal variable that keeps track of the previous history for this
+		// undo the last move and update the state of the game / your internal variables accordingly
+        // - note that you need to maintain an internal variable that keeps track of the previous history for this
+        String undoMove = storedMove.pop();
+        char undoPiece = storedPiece.pop();
+
+        // Get the previous move in opposite order - (for example "a2-a3\n" to "a3-a2\n)
+        int srcColumn = mapColumnToIndex(undoMove.charAt(3));
+        int srcRow = mapRowToIndex(undoMove.charAt(4));
+        int destColumn = mapColumnToIndex(undoMove.charAt(0));
+        int destRow = mapRowToIndex(undoMove.charAt(1));
+
+        // Start update chess board - store current position piece
+        char currentPiece = board[srcRow][srcColumn];
+
+        // Set src to empty
+        board[srcRow][srcColumn] = '.';
+        //System.out.println("Current piece: " + currentPiece);
+        board[destRow][destColumn] = currentPiece;
+        if ('B' == nextPlayer) {
+            nextPlayer = 'W';
+        } else {
+            nextPlayer = 'B';
+            move -= 1;
+        }
+        board[srcRow][srcColumn] = undoPiece;
 	}
 }

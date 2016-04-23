@@ -1,4 +1,4 @@
-#include "main.h"
+	#include "main.h"
 
 bool test_board() {
 	char charBuffer[1024] = { };
@@ -3482,7 +3482,7 @@ bool test_undo() {
 	if (strcmp(charBuffer, "14 W\nq.br.\nB.ppp\nP.P..\n...PP\n.....\n.R.kK\n") != 0) {
 		return false;
 	}
-	
+
 	chess_boardSet("11 B\nk...r\nqp...\np.b.p\n.P...\nPBPnK\nR...Q\n");
 	chess_move("e6-e5");
 	chess_undo();
@@ -3527,7 +3527,7 @@ bool test_undo() {
 	if (strcmp(charBuffer, "18 W\n.kq.r\n.NB.Q\n.p...\np.bPp\n.PP.P\n..R.K\n") != 0) {
 		return false;
 	}
-	
+
 	chess_boardSet("17 B\nk....\np...p\n.P.r.\n..NqP\nRP..K\n...q.\n");
 	chess_move("d4-c4");
 	chess_undo();
@@ -3563,7 +3563,7 @@ bool test_undo() {
 	if (strcmp(charBuffer, "18 W\nk..Q.\nq...p\npQb..\nP....\n.n.N.\nR.B.K\n") != 0) {
 		return false;
 	}
-	
+
 	chess_boardSet("14 W\nk.r..\n.p.pq\nn.Q..\nP.P..\n..BPP\nR..K.\n");
 	chess_move("a1-a2");
 	chess_undo();
@@ -3581,7 +3581,7 @@ bool test_undo() {
 	if (strcmp(charBuffer, "19 W\n...k.\n..bpB\np.q..\np...p\nP.P.P\n.Q.K.\n") != 0) {
 		return false;
 	}
-	
+
 	chess_boardSet("15 W\n.k...\npqp.b\nQ...p\n....B\nNP..P\n.R..K\n");
 	chess_move("e1-d1");
 	chess_undo();
@@ -3707,7 +3707,7 @@ bool test_undo() {
 	if (strcmp(charBuffer, "14 B\n.Q.r.\npnPb.\n.p..P\n.Pk.K\nP.PB.\nRN...\n") != 0) {
 		return false;
 	}
-	
+
 	chess_boardSet("12 B\nk.br.\n.p.p.\nq.n..\n...p.\nP.QNP\n.RB.K\n");
 	chess_move("a4-b3");
 	chess_undo();

@@ -19,23 +19,25 @@ public class main {
             System.out.println("ex:");
             System.out.println(ex);
             */
+
             test.reset();
                           //abcde
-            String strIn = "1 W\n" +
-                           "kqbnr\n" + //6
-                           "Ppppp\n" + //5
-                           ".....\n" + //4
-                           ".....\n" + //3
-                           ".PPPP\n" + //2
-                           "RNBQK\n";  //1
+            String strIn = "18 W\n" +
+                           "k..Q.\n" + //6
+                           "q...p\n" + //5
+                           "pQb..\n" + //4
+                           "P....\n" + //3
+                           ".n.N.\n" + //2
+                           "R.B.K\n";  //1
             test.boardSet(strIn);
             System.out.println("               a               b               c               d               e");
             test.display_board_state();
-            test.moves();
-            test.move("a5-a6\n");
+            //test.moves();
+            test.move("d6-c5\n");
             test.display_board_state();
-            test.move("b5-b3");
+			test.undo();
             test.display_board_state();
+
             //test.display_board_state();
             //System.out.println("Test eval()");
             //System.out.println("Socre:" + test.eval());
