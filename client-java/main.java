@@ -22,21 +22,22 @@ public class main {
 
             test.reset();
                           //abcde
-            String strIn = "18 W\n" +
-                           "k..Q.\n" + //6
-                           "q...p\n" + //5
-                           "pQb..\n" + //4
-                           "P....\n" + //3
-                           ".n.N.\n" + //2
-                           "R.B.K\n";  //1
+            String strIn = "15 W\n" +
+                           ".k..r\n" + //6
+                           "p.P.p\n" + //5
+                           "p....\n" + //4
+                           ".Rnb.\n" + //3
+                           "..PQp\n" + //2
+                           "..B.K\n";  //1
             test.boardSet(strIn);
             System.out.println("               a               b               c               d               e");
             test.display_board_state();
+            test.movesEvaluated();
             //test.moves();
-            test.move("d6-c5\n");
-            test.display_board_state();
-			test.undo();
-            test.display_board_state();
+            //test.move("d6-c5\n");
+            //test.display_board_state();
+			//test.undo();
+            //test.display_board_state();
 
             //test.display_board_state();
             //System.out.println("Test eval()");

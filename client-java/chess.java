@@ -1,7 +1,4 @@
-import java.util.Enumeration;
-import java.util.InputMismatchException;
-import java.util.Stack;
-import java.util.Vector;
+import java.util.*;
 
 /**CS542: ADV AI:COMBINATOR GAMES (Spring 2016)
  * Homework 1
@@ -327,27 +324,27 @@ public class chess {
         switch (piece) {
             // for white piece
             case 'K':        // as King
-                return 100;
+                return 10;
             case 'Q':        // as Queen
-                return 60;
+                return 8;
             case 'R':        // as Rock
-                return 30;
-            case 'B':        // as Bishop
-                return 15;
-            case 'N':        // as Knight
                 return 5;
+            case 'B':        // as Bishop
+                return 5;
+            case 'N':        // as Knight
+                return 4;
             case 'P':        // as Pawn
                 return 1;
             case 'k':        // as King
-                return -100;
+                return -10;
             case 'q':        // as Queen
-                return -60;
+                return -8;
             case 'r':        // as Rock
-                return -30;
-            case 'b':        // as Bishop
-                return -15;
-            case 'n':        // as Knight
                 return -5;
+            case 'b':        // as Bishop
+                return -5;
+            case 'n':        // as Knight
+                return -4;
             case 'p':        // as Pawn
                 return -1;
         }
@@ -482,6 +479,9 @@ public class chess {
         allMoves.addAll(queenMoves);
         allMoves.addAll(kingMoves);
 
+        // Show list of possible move
+
+        System.out.println("Show list of possible move:");
         Enumeration e = allMoves.elements();
         while(e.hasMoreElements())
             System.out.print(e.nextElement());
@@ -966,15 +966,63 @@ public class chess {
     }
 	
 	public static Vector<String> movesShuffled() {
-		// with reference to the state of the game, determine the possible moves and shuffle them before returning them - note that you can call the chess.moves() function in here
-		
-		return new Vector<String>();
+		// with reference to the state of the game, determine the possible moves and shuffle them before returning them
+        // - note that you can call the chess.moves() function in here
+		Vector<String> shuffledMove = moves();
+        Collections.shuffle(shuffledMove);
+
+		return shuffledMove;
 	}
 	
 	public static Vector<String> movesEvaluated() {
-		// with reference to the state of the game, determine the possible moves and sort them in order of an increasing evaluation score before returning them - note that you can call the chess.moves() function in here
-		
-		return new Vector<String>();
+		// with reference to the state of the game, determine the possible moves and sort them in order of an increasing
+        // evaluation score before returning them - note that you can call the chess.moves() function in here
+		Vector<String> listPossibleMoves = movesShuffled();
+        int size = listPossibleMoves.size();
+        int evalMovedScore[] = new int[size];
+        int iterator = 0;
+
+        // Calculate evalMovedScore
+        for (int i = 0; i < size; i++) {
+            move(listPossibleMoves.elementAt(i));
+            evalMovedScore[i] = eval();
+            undo();
+        }
+
+        System.out.println("Show list of possible move after shuffled:");
+        Enumeration e = listPossibleMoves.elements();
+        while(e.hasMoreElements()) {
+            System.out.print("Move: " + e.nextElement() + "   evalScore: " + evalMovedScore[iterator] + "\n");
+            iterator += 1;
+        }
+
+        int tempScore = 0;
+        String tempMove = "";
+        // bubble sort for evalMovedScore, and link with listPossibleMoves
+        for (int i = 0; i < size; i++) {
+            for (int j = 1; j < size-i; j++) {
+                if (evalMovedScore[j-1] > evalMovedScore[j]) {
+                    // Do swap
+                    tempScore = evalMovedScore[j-1];
+                    tempMove = listPossibleMoves.elementAt(j-1);
+
+                    evalMovedScore[j-1] = evalMovedScore[j];
+                    listPossibleMoves.setElementAt(listPossibleMoves.elementAt(j), j-1);
+
+                    evalMovedScore[j] = tempScore;
+                    listPossibleMoves.setElementAt(tempMove, j);
+                }
+            }
+        }
+
+        System.out.println("Show list of possible move after in increasing sorted base on evalMovedScore:");
+        Enumeration ee = listPossibleMoves.elements();
+        iterator = 0;
+        while(ee.hasMoreElements()) {
+            System.out.print("Move: " + ee.nextElement() + "   evalScore: " + evalMovedScore[iterator] + "\n");
+            iterator += 1;
+        }
+		return listPossibleMoves;
 	}
 	
 	public static void move(String charIn) {
@@ -1097,7 +1145,6 @@ public class chess {
 
         // Set src to empty
         board[srcRow][srcColumn] = '.';
-        //System.out.println("Current piece: " + currentPiece);
         board[destRow][destColumn] = currentPiece;
         if ('B' == nextPlayer) {
             nextPlayer = 'W';
