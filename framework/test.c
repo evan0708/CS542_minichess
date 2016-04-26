@@ -1748,7 +1748,6 @@ bool test_moves() {
 	
 	intBuffer = chess_moves(charBuffer);
 	if (test_movesCompare(intBuffer, charBuffer, "a2-a3\nb2-b3\nc2-c3\nd2-d3\ne2-e3\nb1-a3\nb1-c3\n") != true) {
-		printf("1st moves failed!\n");
 		return false;
 	}
 	
@@ -1756,7 +1755,6 @@ bool test_moves() {
 	
 	intBuffer = chess_moves(charBuffer);
 	if (test_movesCompare(intBuffer, charBuffer, "a6-b6\na6-a5\na6-b5\nc6-b5\nc6-a4\nc6-d5\nc6-e4\nc6-b6\nd6-b5\nd6-c4\nd6-e4\ne5-e4\nb3-b2\nb3-a2\nd3-d4\nd3-d5\nd3-c3\nd3-e3\nd3-d2\nd3-c4\nd3-b5\nd3-e4\nd3-c2\nd3-b1\nd3-e2\n") != true) {
-		printf("2nd moves failed!\n");
 		return false;
 	}
 	
@@ -5286,7 +5284,7 @@ bool test_movesEvaluated() {
 	if (test_movesOrder(intBuffer, charBuffer) != true) {
 		return false;
 	}
-	printf("Passed1!!\n");
+
 	chess_boardSet("13 W\nk..r.\nb....\n.Pppp\nP....\n.P.PP\n.R..K\n");
 	
 	intBuffer = chess_movesEvaluated(charBuffer);
@@ -5319,7 +5317,6 @@ bool test_movesEvaluated() {
 	
 	intBuffer = chess_movesEvaluated(charBuffer);
 	if (test_movesOrder(intBuffer, charBuffer) != true) {
-		printf("Failed4!\n");
 		return false;
 	}
 	
@@ -5327,10 +5324,9 @@ bool test_movesEvaluated() {
 	
 	intBuffer = chess_movesEvaluated(charBuffer);
 	if (test_movesOrder(intBuffer, charBuffer) != true) {
-		printf("Failed5!\n");
 		return false;
 	}
-	printf("Passed2!!\n");
+
 	chess_boardSet("20 B\nkb.r.\n...pp\nP..q.\np.B..\nP.QPK\nR....\n");
 	
 	intBuffer = chess_movesEvaluated(charBuffer);
@@ -5372,7 +5368,7 @@ bool test_movesEvaluated() {
 	if (test_movesOrder(intBuffer, charBuffer) != true) {
 		return false;
 	}
-	printf("Passed3!!\n");
+
 	chess_boardSet("14 B\nk...r\npn..p\n.q...\nPp.bP\n..PP.\nRB.KQ\n");
 	
 	intBuffer = chess_movesEvaluated(charBuffer);
@@ -5463,7 +5459,7 @@ bool test_movesEvaluated() {
 	if (test_movesOrder(intBuffer, charBuffer) != true) {
 		return false;
 	}
-	printf("Passed!!\n");
+
 	chess_boardSet("12 B\nQ.k.r\np..pp\n....n\nRp..P\n..PK.\n..BN.\n");
 	
 	intBuffer = chess_movesEvaluated(charBuffer);

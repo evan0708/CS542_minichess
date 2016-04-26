@@ -13,6 +13,7 @@ public class chess {
     private final static char dash = '-';
     private final static char newLine = '\n';
     private static Stack<String> storedMove = new Stack<String>();
+    private static Stack<String> stroedEntireBoard = new Stack<String>();
     private static Stack<Character> storedPiece = new Stack<Character>();
 
     // New add!! chess constructor
@@ -296,25 +297,44 @@ public class chess {
 	public static int eval() {
 		// with reference to the state of the game, return the the evaluation score of the side on move - note that positive means an advantage while negative means a disadvantage
 		String currentBoard = boardGet();
+
         //System.out.println("eval() invoked!!");
         //System.out.println("length:" + currentBoard.length());
         currentBoard = currentBoard.substring(currentBoard.length() - 36);
         //System.out.println("currentStr:");
-        //System.out.println(currentBoard);
-        int totalScore = 0;
+        System.out.println(currentBoard);
+        int totalWhiteScore = 0;
+        int totalBlackScore = 0;
+
         for (char c : currentBoard.toCharArray()) {
-            totalScore += getScoreValue(c);
+            if (Character.isUpperCase(c)) {
+                System.out.println("upper char:" + c  +getScoreValue(c));
+                totalWhiteScore += getScoreValue(c);
+            }
+            else if (Character.isLowerCase(c)) {
+                System.out.println("lower char:" + c + getScoreValue(c));
+                totalBlackScore += getScoreValue(c);
+            }
+            else
+                ;
         }
-        if ('W' == nextPlayer)
-            ;                         // do nothing
-        else if ('B' == nextPlayer)
-            totalScore = -totalScore; // negate totalScore
+        if ('W' == nextPlayer) {
+            System.out.println("TotalWhiteScore: " + totalWhiteScore);
+            totalWhiteScore = totalWhiteScore - totalBlackScore;                         // do nothing
+            System.out.println("TotalWhiteScore - totalBlackScore: " + totalWhiteScore);
+            return totalWhiteScore;
+        }
+        else if ('B' == nextPlayer) {
+            System.out.println("TotalBlackScore: " + totalBlackScore);
+            totalBlackScore = totalBlackScore - totalWhiteScore; // negate totalScore
+            System.out.println("TotalBlackScore - TotalWhiteScore: " + totalBlackScore);
+            return totalBlackScore;
+        }
         else {
             System.err.println("nextPlayer is undefined!! Shouldn't goes here!!");
             System.exit(0);
+            return 0;
         }
-        //System.out.println("Score:" + totalScore);
-		return totalScore;
 	}
 
     // Provide each piece score value to eval()
@@ -336,17 +356,17 @@ public class chess {
             case 'P':        // as Pawn
                 return 1;
             case 'k':        // as King
-                return -10;
+                return 10;
             case 'q':        // as Queen
-                return -8;
+                return 8;
             case 'r':        // as Rock
-                return -5;
+                return 5;
             case 'b':        // as Bishop
-                return -5;
+                return 5;
             case 'n':        // as Knight
-                return -4;
+                return 4;
             case 'p':        // as Pawn
-                return -1;
+                return 1;
         }
         return 0;
     }
@@ -1028,6 +1048,10 @@ public class chess {
 	public static void move(String charIn) {
 		// perform the supplied move (for example "a5-a4\n") and update the state of the game / your internal variables accordingly
         // - note that it advised to do a sanity check of the supplied move
+
+        // Stored entire board status before process
+        stroedEntireBoard.push(boardGet());
+
         int srcColumn = mapColumnToIndex(charIn.charAt(0));
         int srcRow = mapRowToIndex(charIn.charAt(1));
         int destColumn = mapColumnToIndex(charIn.charAt(3));
@@ -1131,6 +1155,9 @@ public class chess {
 	public static void undo() {
 		// undo the last move and update the state of the game / your internal variables accordingly
         // - note that you need to maintain an internal variable that keeps track of the previous history for this
+
+        // Inside comment code doesn't work, need to fix about when P change to Q, and etc.
+        /*
         String undoMove = storedMove.pop();
         char undoPiece = storedPiece.pop();
 
@@ -1153,5 +1180,8 @@ public class chess {
             move -= 1;
         }
         board[srcRow][srcColumn] = undoPiece;
+        */
+        String str = stroedEntireBoard.pop();
+        boardSet(str);
 	}
 }

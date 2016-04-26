@@ -5298,7 +5298,6 @@ bool test_movesEvaluated() {
 	
 	intBuffer = chess_movesEvaluated(charBuffer);
 	if (test_movesOrder(intBuffer, charBuffer) != true) {
-		printf("Failed!\n");
 		return false;
 	}
 	
@@ -5320,6 +5319,7 @@ bool test_movesEvaluated() {
 	
 	intBuffer = chess_movesEvaluated(charBuffer);
 	if (test_movesOrder(intBuffer, charBuffer) != true) {
+		printf("Failed4!\n");
 		return false;
 	}
 	
@@ -5327,6 +5327,7 @@ bool test_movesEvaluated() {
 	
 	intBuffer = chess_movesEvaluated(charBuffer);
 	if (test_movesOrder(intBuffer, charBuffer) != true) {
+		printf("Failed5!\n");
 		return false;
 	}
 	printf("Passed2!!\n");

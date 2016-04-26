@@ -32,6 +32,7 @@ public class main {
             test.boardSet(strIn);
             System.out.println("               a               b               c               d               e");
             test.display_board_state();
+            test.eval();
             test.movesEvaluated();
             //test.moves();
             //test.move("d6-c5\n");
