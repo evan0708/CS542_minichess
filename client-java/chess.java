@@ -128,7 +128,17 @@ public class chess {
 
         if (1 == move)
             return '?';
-        if (41 == move)
+        if (41 == move) {
+            for (int i = 0; i < row; ++i) {
+                for (int j = 0; j < column; ++j) {
+                    if ('k' == board[i][j])
+                        black_k_Exist = true;
+                    if ('K' == board[i][j])
+                        white_K_Exist = true;
+                }
+            }
+        }
+        if (41 == move && true == black_k_Exist && true == white_K_Exist)
             return '=';
         for (int i = 0; i < row; ++i) {
             for (int j = 0; j < column; ++j) {
@@ -302,36 +312,36 @@ public class chess {
         //System.out.println("length:" + currentBoard.length());
         currentBoard = currentBoard.substring(currentBoard.length() - 36);
         //System.out.println("currentStr:");
-        System.out.println(currentBoard);
+        //System.out.println(currentBoard);
         int totalWhiteScore = 0;
         int totalBlackScore = 0;
 
         for (char c : currentBoard.toCharArray()) {
             if (Character.isUpperCase(c)) {
-                System.out.println("upper char:" + c  +getScoreValue(c));
+                //System.out.println("upper char:" + c  +getScoreValue(c));
                 totalWhiteScore += getScoreValue(c);
             }
             else if (Character.isLowerCase(c)) {
-                System.out.println("lower char:" + c + getScoreValue(c));
+                //System.out.println("lower char:" + c + getScoreValue(c));
                 totalBlackScore += getScoreValue(c);
             }
             else
                 ;
         }
         if ('W' == nextPlayer) {
-            System.out.println("TotalWhiteScore: " + totalWhiteScore);
+            //System.out.println("TotalWhiteScore: " + totalWhiteScore);
             totalWhiteScore = totalWhiteScore - totalBlackScore;                         // do nothing
-            System.out.println("TotalWhiteScore - totalBlackScore: " + totalWhiteScore);
+            //System.out.println("TotalWhiteScore - totalBlackScore: " + totalWhiteScore);
             return totalWhiteScore;
         }
         else if ('B' == nextPlayer) {
-            System.out.println("TotalBlackScore: " + totalBlackScore);
+            //System.out.println("TotalBlackScore: " + totalBlackScore);
             totalBlackScore = totalBlackScore - totalWhiteScore; // negate totalScore
-            System.out.println("TotalBlackScore - TotalWhiteScore: " + totalBlackScore);
+            //System.out.println("TotalBlackScore - TotalWhiteScore: " + totalBlackScore);
             return totalBlackScore;
         }
         else {
-            System.err.println("nextPlayer is undefined!! Shouldn't goes here!!");
+            //System.err.println("nextPlayer is undefined!! Shouldn't goes here!!");
             System.exit(0);
             return 0;
         }
@@ -344,31 +354,32 @@ public class chess {
         switch (piece) {
             // for white piece
             case 'K':        // as King
-                return 10;
+                return 100;
             case 'Q':        // as Queen
-                return 8;
+                return 60;
             case 'R':        // as Rock
-                return 5;
+                return 30;
             case 'B':        // as Bishop
-                return 5;
+                return 30;
             case 'N':        // as Knight
-                return 4;
-            case 'P':        // as Pawn
-                return 1;
-            case 'k':        // as King
                 return 10;
+            case 'P':        // as Pawn
+                return 5;
+            case 'k':        // as King
+                return 100;
             case 'q':        // as Queen
-                return 8;
+                return 60;
             case 'r':        // as Rock
-                return 5;
+                return 30;
             case 'b':        // as Bishop
-                return 5;
+                return 30;
             case 'n':        // as Knight
-                return 4;
+                return 10;
             case 'p':        // as Pawn
-                return 1;
+                return 5;
+            default:
+                return 0;
         }
-        return 0;
     }
 
     /* Example: Interface position      Implementation index position:[row][column]
@@ -500,11 +511,12 @@ public class chess {
         allMoves.addAll(kingMoves);
 
         // Show list of possible move
-
+        /*
         System.out.println("Show list of possible move:");
         Enumeration e = allMoves.elements();
         while(e.hasMoreElements())
             System.out.print(e.nextElement());
+        */
 
 		return allMoves;
 	}
@@ -518,7 +530,7 @@ public class chess {
         String pos = convertPosToString(x, y);
         String extraPos;
 
-        System.out.println("collectPawnMoves");
+        //System.out.println("collectPawnMoves");
         // calculate White player - toward upper (North)
         if ('W' == player) {
             // check diagonal upper left if is enemy
@@ -578,7 +590,7 @@ public class chess {
         String pos = convertPosToString(x, y);
         String extraPos;
 
-        System.out.println("collectKnightMoves");
+        //System.out.println("collectKnightMoves");
         // Upper 1st left!
         if (isImptPosValid(x-2, y-1) && !isOwn(board[x-2][y-1])) {
             //System.out.println("");
@@ -640,7 +652,7 @@ public class chess {
         boolean stopLookWest = false;
         boolean stopLookEast = false;
 
-        System.out.println("collectRockMoves");
+        //System.out.println("collectRockMoves");
         // All direction
         //System.out.println("X: " + x + "Y: " + y);
         for (int i = 1; i < 6; i++) {
@@ -709,7 +721,7 @@ public class chess {
         boolean stopLookWest = false;
         boolean stopLookEast = false;
 
-        System.out.println("collectBishopMoves");
+        //System.out.println("collectBishopMoves");
 
         // Go diagonally
         for (int i = 1; i < 5; i++) {
@@ -813,7 +825,7 @@ public class chess {
         boolean stopLookWest = false;
         boolean stopLookEast = false;
 
-        System.out.println("collectQueenMoves");
+        //System.out.println("collectQueenMoves");
 
         // Go diagonally
         for (int i = 1; i < 5; i++) {
@@ -1009,32 +1021,11 @@ public class chess {
             undo();
         }
 
-        System.out.println("Show list of possible move after shuffled:");
-        Enumeration e = listPossibleMoves.elements();
-        while(e.hasMoreElements()) {
-            System.out.print("Move: " + e.nextElement() + "   evalScore: " + evalMovedScore[iterator] + "\n");
-            iterator += 1;
-        }
+        int low = 0;
+        int high = evalMovedScore.length - 1;
+        quickSort(evalMovedScore, low, high, listPossibleMoves);
 
-        int tempScore = 0;
-        String tempMove = "";
-        // bubble sort for evalMovedScore, and link with listPossibleMoves
-        for (int i = 0; i < size; i++) {
-            for (int j = 1; j < size-i; j++) {
-                if (evalMovedScore[j-1] > evalMovedScore[j]) {
-                    // Do swap
-                    tempScore = evalMovedScore[j-1];
-                    tempMove = listPossibleMoves.elementAt(j-1);
-
-                    evalMovedScore[j-1] = evalMovedScore[j];
-                    listPossibleMoves.setElementAt(listPossibleMoves.elementAt(j), j-1);
-
-                    evalMovedScore[j] = tempScore;
-                    listPossibleMoves.setElementAt(tempMove, j);
-                }
-            }
-        }
-
+        /*
         System.out.println("Show list of possible move after in increasing sorted base on evalMovedScore:");
         Enumeration ee = listPossibleMoves.elements();
         iterator = 0;
@@ -1042,8 +1033,55 @@ public class chess {
             System.out.print("Move: " + ee.nextElement() + "   evalScore: " + evalMovedScore[iterator] + "\n");
             iterator += 1;
         }
+        */
+
 		return listPossibleMoves;
 	}
+
+    public static void quickSort(int[] arr, int low, int high, Vector<String> listPossibleMoves) {
+        if (arr == null || arr.length == 0)
+            return;
+
+        if (low >= high)
+            return;
+
+        // pick the pivot
+        int middle = low + (high - low) / 2;
+        int pivot = arr[middle];
+
+        // make left < pivot and right > pivot
+        int i = low, j = high;
+        while (i <= j) {
+            while (arr[i] < pivot) {
+                i++;
+            }
+
+            while (arr[j] > pivot) {
+                j--;
+            }
+
+            if (i <= j) {
+                int temp = arr[i];
+                String tempMove = listPossibleMoves.elementAt(i);
+
+                arr[i] = arr[j];
+                listPossibleMoves.setElementAt(listPossibleMoves.elementAt(j), i);
+
+                arr[j] = temp;
+                listPossibleMoves.setElementAt(tempMove, j);
+
+                i++;
+                j--;
+            }
+        }
+
+        // recursively sort two sub parts
+        if (low < j)
+            quickSort(arr, low, j, listPossibleMoves);
+
+        if (high > i)
+            quickSort(arr, i, high, listPossibleMoves);
+    }
 	
 	public static void move(String charIn) {
 		// perform the supplied move (for example "a5-a4\n") and update the state of the game / your internal variables accordingly
@@ -1129,15 +1167,23 @@ public class chess {
 
 	
 	public static String moveRandom() {
-		// perform a random move and return it - one example output is given below - note that you can call the chess.movesShuffled() function as well as the chess.move() function in here
+		// perform a random move and return it - one example output is given below
+        // - note that you can call the chess.movesShuffled() function as well as the chess.move() function in here
+        String getRandomMove = movesShuffled().get(0);
+        //System.out.println("moveRandom: " + getRandomMove);
+        move(getRandomMove);
 		
-		return "a2-a3\n";
+		return getRandomMove;
 	}
 	
 	public static String moveGreedy() {
-		// perform a greedy move and return it - one example output is given below - note that you can call the chess.movesEvaluated() function as well as the chess.move() function in here
-		
-		return "a2-a3\n";
+		// perform a greedy move and return it - one example output is given below
+        // - note that you can call the chess.movesEvaluated() function as well as the chess.move() function in here
+		String getGreedyMove = movesEvaluated().get(0);
+        //System.out.println("moveGreedy: " + getGreedyMove);
+        move(getGreedyMove);
+
+		return getGreedyMove;
 	}
 	
 	public static String moveNegamax(int intDepth, int intDuration) {

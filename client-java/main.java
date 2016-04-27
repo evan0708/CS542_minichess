@@ -29,11 +29,12 @@ public class main {
                            ".Rnb.\n" + //3
                            "..PQp\n" + //2
                            "..B.K\n";  //1
-            test.boardSet(strIn);
-            System.out.println("               a               b               c               d               e");
-            test.display_board_state();
-            test.eval();
-            test.movesEvaluated();
+            //test.boardSet(strIn);
+            //System.out.println("               a               b               c               d               e");
+            //test.display_board_state();
+            //test.eval();
+            //test.movesEvaluated();
+			//test.moveGreedy();
             //test.moves();
             //test.move("d6-c5\n");
             //test.display_board_state();
