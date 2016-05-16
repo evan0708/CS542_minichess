@@ -22,13 +22,13 @@ public class main {
 
             test.reset();
                           //abcde
-            String strIn = "15 W\n" +
-                           ".k..r\n" + //6
-                           "p.P.p\n" + //5
-                           "p....\n" + //4
-                           ".Rnb.\n" + //3
-                           "..PQp\n" + //2
-                           "..B.K\n";  //1
+            String strIn = "16 W\n" +
+                           "b....\n" + //6
+                           ".k..p\n" + //5
+                           "q.p..\n" + //4
+                           ".p...\n" + //3
+                           ".P.NP\n" + //2
+                           "RB..K\n";  //1
             //test.boardSet(strIn);
             //System.out.println("               a               b               c               d               e");
             //test.display_board_state();

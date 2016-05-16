@@ -9550,9 +9550,10 @@ bool test_moveNegamax() {
 			
 		}
 	}
-	
+	printf("intWon:%d\n", intWon);
+	printf("intLos:%d\n", intLost);
 	if (intWon < 90) {
-		printf("test: failed test_moveNegamax_001\n");
+		printf("intWon:%d -- test: failed test_moveNegamax_001\n", intWon);
 		return false;
 		
 	} else if (intLost > 10) {

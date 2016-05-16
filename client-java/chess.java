@@ -1,5 +1,7 @@
 import java.util.*;
 
+import static java.lang.Math.max;
+
 /**CS542: ADV AI:COMBINATOR GAMES (Spring 2016)
  * Homework 1
  * Edited by Shu-Ping Chu
@@ -305,7 +307,8 @@ public class chess {
 	}
 	
 	public static int eval() {
-		// with reference to the state of the game, return the the evaluation score of the side on move - note that positive means an advantage while negative means a disadvantage
+		// with reference to the state of the game, return the the evaluation score of the side on move
+        // - note that positive means an advantage while negative means a disadvantage
 		String currentBoard = boardGet();
 
         //System.out.println("eval() invoked!!");
@@ -1185,18 +1188,88 @@ public class chess {
 
 		return getGreedyMove;
 	}
-	
+
 	public static String moveNegamax(int intDepth, int intDuration) {
-		// perform a negamax move and return it - one example output is given below - note that you can call the the other functions in here
-		
-		return "a2-a3\n";
+		// perform a negamax move and return it - one example output is given below
+        // - note that you can call the the other functions in here
+        String best = "";
+        int score = -99999999;
+        int temp = 0;
+        Vector<String> moves = moves();
+
+        for (String move : moves) {
+            move(move);
+            temp = -negamax(intDepth - 1);
+            undo();
+
+            if (temp > score) {
+                best = move;
+                score = temp;
+            }
+        }
+		move(best);
+		return best;
 	}
-	
+
+    public static int negamax(int depth) {
+        if ((depth == 0 ) || (winner() != '?'))
+            return eval();
+
+        int score = -99999999;
+        Vector<String> moves = moves();
+
+        for (String move : moves) {
+            move(move);
+            score = max(score, -negamax(depth - 1));
+            undo();
+        }
+        return score;
+    }
+
 	public static String moveAlphabeta(int intDepth, int intDuration) {
-		// perform a alphabeta move and return it - one example output is given below - note that you can call the the other functions in here
-		
-		return "a2-a3\n";
+		// perform a alphabeta move and return it - one example output is given below
+        // - note that you can call the the other functions in here
+        String best = "";
+        int alpha = -99999999;
+        int beta = 99999999;
+        int temp = 0;
+        Vector<String> moves = movesEvaluated();
+
+        for(String move: moves) {
+            move(move);
+            temp = -alphabeta(intDepth - 1, -beta, -alpha);
+            undo();
+
+            if (temp > alpha) {
+                best = move;
+                alpha = temp;
+            }
+        }
+        move(best);
+
+		return best;
 	}
+
+    public static int alphabeta(int depth, int alpha, int beta) {
+        if ((depth == 0) || (winner() != '?'))
+            return eval();
+
+        int score = -99999999;
+        Vector<String> moves = moves();
+
+        for(String move: moves) {
+            move(move);
+            score = max(score, -alphabeta(depth - 1, -beta, -alpha));
+            undo();
+
+            alpha = max(alpha, score);
+
+            if (alpha >= beta) {
+                break;
+            }
+        }
+        return score;
+    }
 	
 	public static void undo() {
 		// undo the last move and update the state of the game / your internal variables accordingly
