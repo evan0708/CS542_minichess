@@ -17,6 +17,11 @@ public class chess {
     private static Stack<String> storedMove = new Stack<String>();
     private static Stack<String> stroedEntireBoard = new Stack<String>();
     private static Stack<Character> storedPiece = new Stack<Character>();
+    private static int intervalTime = 6000;
+    private static long endTime;
+    private static int timecounter;
+    private static long timecache;
+    private static boolean timeMgmOn = false;
 
     // New add!! chess constructor
     public chess() {
@@ -1235,22 +1240,70 @@ public class chess {
         int temp = 0;
         Vector<String> moves = movesEvaluated();
 
-        for(String move: moves) {
-            move(move);
-            temp = -alphabeta(intDepth - 1, -beta, -alpha);
-            undo();
+        if (0 <= intDepth) {
+            for(String move: moves) {
+                move(move);
+                temp = -alphabeta(intDepth - 1, -beta, -alpha);
+                undo();
 
-            if (temp > alpha) {
-                best = move;
-                alpha = temp;
+                if (temp > alpha) {
+                    best = move;
+                    alpha = temp;
+                }
+            }
+        }
+        else {
+            timeMgmOn = true;
+            System.out.println("Start tournament!!");
+            System.out.println("So far move:" + move);
+            if (0 != move) {
+                intervalTime = intDuration / (40 - move);
+            }
+            endTime = System.currentTimeMillis() + intervalTime;
+            System.out.println("Interval time:" + intervalTime);
+            System.out.println("End time:" + endTime);
+            for ( int i = 3; i < 15; i++) {
+                System.out.println("Depth:" + i);
+                for (String move: moves) {
+                    move(move);
+                    temp = -alphabeta(i - 1, -beta, -alpha);
+                    undo();
+
+                    if (temp > alpha) {
+                        best = move;
+                        alpha = temp;
+                    }
+                }
+                if (System.currentTimeMillis() > endTime) {
+                    System.out.println("Move alphabeta time out: " + System.currentTimeMillis());
+                    break;
+                }
             }
         }
         move(best);
-
 		return best;
 	}
 
     public static int alphabeta(int depth, int alpha, int beta) {
+
+        System.out.println("Alphabeta depth: " + depth);
+        if (true == timeMgmOn) {
+            timecounter += 1;
+            if (timecounter > 1000) {
+                timecounter = 0;
+                timecache = System.currentTimeMillis();
+            }
+            if (timecache > endTime) {
+                System.out.println("Alphabeta time out: " + timecache);
+                return 0;
+            }
+        }
+        /*
+        if (System.currentTimeMillis() > endTime) {
+            System.out.println("End alphabeta!");
+            return 0;
+        }
+        */
         if ((depth == 0) || (winner() != '?'))
             return eval();
 

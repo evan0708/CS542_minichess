@@ -708,7 +708,6 @@ bool test_board() {
 
 bool test_winner() {
 	chess_reset();
-	chess_boardSet("1 W\nkqbnr\nppppp\n.....\n.....\nPPPPP\nRNBQK\n");
 	if (chess_winner() != '?') {
 		printf("test: failed test_winner_001\n");
 		return false;
@@ -9550,10 +9549,9 @@ bool test_moveNegamax() {
 			
 		}
 	}
-	printf("intWon:%d\n", intWon);
-	printf("intLos:%d\n", intLost);
+	
 	if (intWon < 90) {
-		printf("intWon:%d -- test: failed test_moveNegamax_001\n", intWon);
+		printf("test: failed test_moveNegamax_001\n");
 		return false;
 		
 	} else if (intLost > 10) {

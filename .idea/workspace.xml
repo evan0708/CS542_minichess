@@ -6,8 +6,10 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/framework/framework" afterPath="$PROJECT_DIR$/framework/framework" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client-java/chess.java" afterPath="$PROJECT_DIR$/client-java/chess.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client-java/main.java" afterPath="$PROJECT_DIR$/client-java/main.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/framework/assets/index.html" afterPath="$PROJECT_DIR$/framework/assets/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/framework/imcs.c" afterPath="$PROJECT_DIR$/framework/imcs.c" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/framework/test.c" afterPath="$PROJECT_DIR$/framework/test.c" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/framework/webserver.c" afterPath="$PROJECT_DIR$/framework/webserver.c" />
     </list>
     <ignored path="teaching-minichess.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -32,8 +34,8 @@
       <file leaf-file-name="chess.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/client-java/chess.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="482">
-              <caret line="1257" column="36" selection-start-line="1257" selection-start-column="36" selection-end-line="1257" selection-end-column="36" />
+            <state relative-caret-position="180">
+              <caret line="1292" column="32" selection-start-line="1292" selection-start-column="32" selection-end-line="1292" selection-end-column="32" />
               <folding>
                 <element signature="docComment;class#chess#0" expanded="false" />
               </folding>
@@ -44,18 +46,8 @@
       <file leaf-file-name="main.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/client-java/main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="144">
+            <state relative-caret-position="576">
               <caret line="32" column="46" selection-start-line="32" selection-start-column="46" selection-end-line="32" selection-end-column="46" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="test.c" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/framework/test.c">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="31212">
-              <caret line="1736" column="4" selection-start-line="1736" selection-start-column="4" selection-end-line="1736" selection-end-column="4" />
               <folding />
             </state>
           </provider>
@@ -877,15 +869,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/framework/test.c">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="31212">
-          <caret line="1736" column="4" selection-start-line="1736" selection-start-column="4" selection-end-line="1736" selection-end-column="4" />
+        <state relative-caret-position="31194">
+          <caret line="1735" column="4" selection-start-line="1735" selection-start-column="4" selection-end-line="1735" selection-end-column="4" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/client-java/main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="144">
+        <state relative-caret-position="576">
           <caret line="32" column="46" selection-start-line="32" selection-start-column="46" selection-end-line="32" selection-end-column="46" />
           <folding />
         </state>
@@ -893,8 +885,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/client-java/chess.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="482">
-          <caret line="1257" column="36" selection-start-line="1257" selection-start-column="36" selection-end-line="1257" selection-end-column="36" />
+        <state relative-caret-position="180">
+          <caret line="1292" column="32" selection-start-line="1292" selection-start-column="32" selection-end-line="1292" selection-end-column="32" />
           <folding>
             <element signature="docComment;class#chess#0" expanded="false" />
           </folding>
