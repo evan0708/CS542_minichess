@@ -23,6 +23,11 @@ public class chess {
     private static long timecache;
     private static boolean timeMgmOn = false;
 
+    private static long zobristNum = 0;
+    private static long zobristBlackRandom = 0;
+    private static long zobristWhiteRandom = 0;
+    private static Random randomGenerator = new Random();
+
     // New add!! chess constructor
     public chess() {
         reset();
@@ -1284,6 +1289,23 @@ public class chess {
 		return best;
 	}
 
+    public static void xorZobrist(long zobristNum) {
+        zobristNum = 0;
+        zobristBlackRandom = randomGenerator.nextLong();
+        zobristWhiteRandom = randomGenerator.nextLong();
+
+        if (nextPlayer == 'B') {
+            zobristNum ^= zobristBlackRandom;
+        } else if (nextPlayer == 'W') {
+            zobristNum ^= zobristWhiteRandom;
+        }
+
+        for(int i = 0; i < row; i++ ) {
+            for (int j = 0; j < column; j++) {
+               ;
+            }
+        }
+    }
     public static int alphabeta(int depth, int alpha, int beta) {
 
         System.out.println("Alphabeta depth: " + depth);
