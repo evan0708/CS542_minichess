@@ -1107,7 +1107,7 @@ public class chess {
         // Stored entire board status before process
         storedEntireBoard.push(boardGet());
 
-        System.out.println("CharIn: " + charIn);
+        //System.out.println("CharIn: " + charIn);
         int srcColumn = mapColumnToIndex(charIn.charAt(0));
         int srcRow = mapRowToIndex(charIn.charAt(1));
         int destColumn = mapColumnToIndex(charIn.charAt(3));
@@ -1275,7 +1275,7 @@ public class chess {
             endTime = System.currentTimeMillis() + intervalTime;
             System.out.println("Interval time:" + intervalTime);
             System.out.println("End time:" + endTime);
-            for ( int i = 3; i < 15; i++) {
+            for ( int i = 5; i < 7; i++) {
                 System.out.println("Depth:" + i);
                 for (String move: moves) {
                     move(move);
@@ -1327,6 +1327,7 @@ public class chess {
         Vector<String> moves = moves();
 
         // Show TTable
+        /*
         System.out.println("Display TTable: ");
         Iterator iterator = TTable.keySet().iterator();
         while(iterator.hasNext()) {
@@ -1334,6 +1335,7 @@ public class chess {
             Object value = TTable.get(key);
             System.out.println("Key: " + key + "  Value: " + value);
         }
+        */
 
         // Load from transposition table
 
@@ -1349,6 +1351,9 @@ public class chess {
                     return trans.getScore();
                 }
             }
+            System.out.println("Move gets used!!!**************");
+        } else {
+            System.out.println("Nothing found in TTable!!******");
         }
 
         for(String move: moves) {
