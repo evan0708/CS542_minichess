@@ -65,38 +65,7 @@ public class ZobristHashing {
 
     public static long xorZobrist(long zobristNum, int rowPos, int columnPos, char piece) {
         zobristNum ^= zobristPiece.get(piece) * zobristBoard[rowPos][columnPos];
-        /*
-        for (int i = 0; i < chess.row; i++ ) {
-            for (int j = 0; j < chess.column; j++) {
-                if (chess.board[chess.row][chess.column] == 'k')
-                    zobristNum ^= zobristBoard[chess.row][chess.column][0];
-                if (chess.board[chess.row][chess.column] == 'q')
-                    zobristNum ^= zobristPiece[chess.row][chess.column][1];
-                if (chess.board[chess.row][chess.column] == 'b')
-                    zobristNum ^= zobristPiece[chess.row][chess.column][2];
-                if (chess.board[chess.row][chess.column] == 'n')
-                    zobristNum ^= zobristPiece[chess.row][chess.column][3];
-                if (chess.board[chess.row][chess.column] == 'r')
-                    zobristNum ^= zobristPiece[chess.row][chess.column][4];
-                if (chess.board[chess.row][chess.column] == 'p')
-                    zobristNum ^= zobristPiece[chess.row][chess.column][5];
-                if (chess.board[chess.row][chess.column] == '.')
-                    zobristNum ^= zobristPiece[chess.row][chess.column][6];
-                if (chess.board[chess.row][chess.column] == 'P')
-                    zobristNum ^= zobristPiece[chess.row][chess.column][7];
-                if (chess.board[chess.row][chess.column] == 'R')
-                    zobristNum ^= zobristPiece[chess.row][chess.column][8];
-                if (chess.board[chess.row][chess.column] == 'N')
-                    zobristNum ^= zobristPiece[chess.row][chess.column][9];
-                if (chess.board[chess.row][chess.column] == 'B')
-                    zobristNum ^= zobristPiece[chess.row][chess.column][10];
-                if (chess.board[chess.row][chess.column] == 'Q')
-                    zobristNum ^= zobristPiece[chess.row][chess.column][11];
-                if (chess.board[chess.row][chess.column] == 'K')
-                    zobristNum ^= zobristPiece[chess.row][chess.column][12];
-            }
-        }
-        */
+
         return zobristNum;
     }
 

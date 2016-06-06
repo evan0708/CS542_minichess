@@ -1,6 +1,7 @@
 import java.util.*;
 
 import static java.lang.Math.max;
+import static java.lang.Math.min;
 
 /**CS542: ADV AI:COMBINATOR GAMES (Spring 2016)
  * Homework 1
@@ -9,7 +10,6 @@ import static java.lang.Math.max;
 public class chess {
     public final static int row = 6;
     public final static int column = 5;
-    public final static int possiblePiece = 13;
 
 	public static char [][] board = new char[row][column];
     public static char nextPlayer;                         // for next player
@@ -1107,6 +1107,7 @@ public class chess {
         // Stored entire board status before process
         storedEntireBoard.push(boardGet());
 
+        System.out.println("CharIn: " + charIn);
         int srcColumn = mapColumnToIndex(charIn.charAt(0));
         int srcRow = mapRowToIndex(charIn.charAt(1));
         int destColumn = mapColumnToIndex(charIn.charAt(3));
@@ -1325,6 +1326,31 @@ public class chess {
         int score = -99999999;
         Vector<String> moves = moves();
 
+        // Show TTable
+        System.out.println("Display TTable: ");
+        Iterator iterator = TTable.keySet().iterator();
+        while(iterator.hasNext()) {
+            Object key = iterator.next();
+            Object value = TTable.get(key);
+            System.out.println("Key: " + key + "  Value: " + value);
+        }
+
+        // Load from transposition table
+
+        System.out.println("Loading from transposition table");
+        trans = TTable.get(ZobristHashing.getZobristNum());
+        if (null != trans) {
+            if (trans.getDepth() > depth) {
+                if (trans.getBound() == Bound.UPPER) {
+                    beta = min(beta, trans.getScore());
+                } else if (trans.getBound() == Bound.LOWER) {
+                    alpha = max(alpha, trans.getScore());
+                } else {
+                    return trans.getScore();
+                }
+            }
+        }
+
         for(String move: moves) {
             move(move);
             score = max(score, -alphabeta(depth - 1, -beta, -alpha));
@@ -1338,6 +1364,8 @@ public class chess {
         }
 
         // Store in the transposition table
+
+        System.out.println("Storing from transposition table");
         if (score <= oldAlpha)
             bound = Bound.UPPER;
         else if (score >= beta)

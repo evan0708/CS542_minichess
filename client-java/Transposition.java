@@ -25,7 +25,7 @@ public class Transposition {
         return this.depth;
     }
 
-    public int score() {
+    public int getScore() {
         return this.score;
     }
 

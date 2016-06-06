@@ -2,18 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4ee01464-d1dc-43b4-8738-a4950d06c60c" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client-java/Transposition.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client-java/ZobristHashing.java" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/teaching-minichess/chess.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/teaching-minichess/main.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/teaching-minichess/zeromq.class" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client-java/client.jar" afterPath="$PROJECT_DIR$/client-java/client.jar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/teaching-minichess/client.jar" afterPath="$PROJECT_DIR$/out/production/teaching-minichess/client.jar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dictionaries/evanchu.xml" afterPath="$PROJECT_DIR$/.idea/dictionaries/evanchu.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client-java/Transposition.java" afterPath="$PROJECT_DIR$/client-java/Transposition.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client-java/ZobristHashing.java" afterPath="$PROJECT_DIR$/client-java/ZobristHashing.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client-java/chess.java" afterPath="$PROJECT_DIR$/client-java/chess.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client-java/main.java" afterPath="$PROJECT_DIR$/client-java/main.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client-java/manifest" afterPath="$PROJECT_DIR$/client-java/manifest" />
     </list>
     <ignored path="teaching-minichess.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -38,12 +30,12 @@
       <file leaf-file-name="chess.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/client-java/chess.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-22549">
-              <caret line="73" column="0" selection-start-line="73" selection-start-column="0" selection-end-line="73" selection-end-column="0" />
+            <state relative-caret-position="2376">
+              <caret line="144" column="21" selection-start-line="144" selection-start-column="17" selection-end-line="144" selection-end-column="21" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#1201#1202#0" expanded="true" />
-                <element signature="e#1224#1225#0" expanded="true" />
+                <element signature="e#1187#1188#0" expanded="true" />
+                <element signature="e#1210#1211#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -52,8 +44,8 @@
       <file leaf-file-name="ZobristHashing.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/client-java/ZobristHashing.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="392">
-              <caret line="61" column="36" selection-start-line="61" selection-start-column="23" selection-end-line="61" selection-end-column="36" />
+            <state relative-caret-position="954">
+              <caret line="53" column="30" selection-start-line="53" selection-start-column="30" selection-end-line="53" selection-end-column="30" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#2542#2543#0" expanded="true" />
@@ -66,15 +58,15 @@
       <file leaf-file-name="Transposition.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/client-java/Transposition.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="216">
-              <caret line="12" column="25" selection-start-line="12" selection-start-column="21" selection-end-line="12" selection-end-column="25" />
+            <state relative-caret-position="468">
+              <caret line="26" column="0" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
               <folding>
                 <element signature="e#506#507#0" expanded="true" />
                 <element signature="e#539#540#0" expanded="true" />
-                <element signature="e#565#566#0" expanded="true" />
-                <element signature="e#598#599#0" expanded="true" />
-                <element signature="e#635#636#0" expanded="true" />
-                <element signature="e#668#669#0" expanded="true" />
+                <element signature="e#568#569#0" expanded="true" />
+                <element signature="e#601#602#0" expanded="true" />
+                <element signature="e#638#639#0" expanded="true" />
+                <element signature="e#671#672#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -103,7 +95,7 @@
       <file leaf-file-name="main.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/client-java/main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="216">
+            <state relative-caret-position="-706">
               <caret line="12" column="14" selection-start-line="12" selection-start-column="14" selection-end-line="12" selection-end-column="14" />
               <folding />
             </state>
@@ -141,9 +133,9 @@
         <option value="$PROJECT_DIR$/client-java/Chess/ZobristHasing.java" />
         <option value="$PROJECT_DIR$/client-java/ZobristHasing.java" />
         <option value="$PROJECT_DIR$/client-java/main.java" />
-        <option value="$PROJECT_DIR$/client-java/ZobristHashing.java" />
         <option value="$PROJECT_DIR$/client-java/TranspositionTable.java" />
         <option value="$PROJECT_DIR$/client-java/Transposition.java" />
+        <option value="$PROJECT_DIR$/client-java/ZobristHashing.java" />
         <option value="$PROJECT_DIR$/client-java/chess.java" />
       </list>
     </option>
@@ -642,8 +634,8 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1201#1202#0" expanded="true" />
-            <element signature="e#1224#1225#0" expanded="true" />
+            <element signature="e#1187#1188#0" expanded="true" />
+            <element signature="e#1210#1211#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -662,8 +654,8 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1201#1202#0" expanded="true" />
-            <element signature="e#1224#1225#0" expanded="true" />
+            <element signature="e#1187#1188#0" expanded="true" />
+            <element signature="e#1210#1211#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -682,8 +674,8 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1201#1202#0" expanded="true" />
-            <element signature="e#1224#1225#0" expanded="true" />
+            <element signature="e#1187#1188#0" expanded="true" />
+            <element signature="e#1210#1211#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -702,8 +694,8 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1201#1202#0" expanded="true" />
-            <element signature="e#1224#1225#0" expanded="true" />
+            <element signature="e#1187#1188#0" expanded="true" />
+            <element signature="e#1210#1211#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -729,8 +721,8 @@
           <caret line="1035" column="10" selection-start-line="1035" selection-start-column="10" selection-end-line="1035" selection-end-column="10" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1201#1202#0" expanded="true" />
-            <element signature="e#1224#1225#0" expanded="true" />
+            <element signature="e#1187#1188#0" expanded="true" />
+            <element signature="e#1210#1211#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -756,8 +748,8 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1201#1202#0" expanded="true" />
-            <element signature="e#1224#1225#0" expanded="true" />
+            <element signature="e#1187#1188#0" expanded="true" />
+            <element signature="e#1210#1211#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -783,8 +775,8 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1201#1202#0" expanded="true" />
-            <element signature="e#1224#1225#0" expanded="true" />
+            <element signature="e#1187#1188#0" expanded="true" />
+            <element signature="e#1210#1211#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -817,8 +809,8 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1201#1202#0" expanded="true" />
-            <element signature="e#1224#1225#0" expanded="true" />
+            <element signature="e#1187#1188#0" expanded="true" />
+            <element signature="e#1210#1211#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -851,8 +843,8 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1201#1202#0" expanded="true" />
-            <element signature="e#1224#1225#0" expanded="true" />
+            <element signature="e#1187#1188#0" expanded="true" />
+            <element signature="e#1210#1211#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -885,8 +877,8 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1201#1202#0" expanded="true" />
-            <element signature="e#1224#1225#0" expanded="true" />
+            <element signature="e#1187#1188#0" expanded="true" />
+            <element signature="e#1210#1211#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -919,8 +911,8 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1201#1202#0" expanded="true" />
-            <element signature="e#1224#1225#0" expanded="true" />
+            <element signature="e#1187#1188#0" expanded="true" />
+            <element signature="e#1210#1211#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -953,8 +945,8 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1201#1202#0" expanded="true" />
-            <element signature="e#1224#1225#0" expanded="true" />
+            <element signature="e#1187#1188#0" expanded="true" />
+            <element signature="e#1210#1211#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1032,14 +1024,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/client-java/main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="12" column="14" selection-start-line="12" selection-start-column="14" selection-end-line="12" selection-end-column="14" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/client-java/makefile">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="54">
@@ -1048,10 +1032,33 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/client-java/Transposition.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="468">
+          <caret line="26" column="0" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
+          <folding>
+            <element signature="e#506#507#0" expanded="true" />
+            <element signature="e#539#540#0" expanded="true" />
+            <element signature="e#568#569#0" expanded="true" />
+            <element signature="e#601#602#0" expanded="true" />
+            <element signature="e#638#639#0" expanded="true" />
+            <element signature="e#671#672#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client-java/main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-706">
+          <caret line="12" column="14" selection-start-line="12" selection-start-column="14" selection-end-line="12" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/client-java/ZobristHashing.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="392">
-          <caret line="61" column="36" selection-start-line="61" selection-start-column="23" selection-end-line="61" selection-end-column="36" />
+        <state relative-caret-position="954">
+          <caret line="53" column="30" selection-start-line="53" selection-start-column="30" selection-end-line="53" selection-end-column="30" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#2542#2543#0" expanded="true" />
@@ -1060,29 +1067,14 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/client-java/Transposition.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="12" column="25" selection-start-line="12" selection-start-column="21" selection-end-line="12" selection-end-column="25" />
-          <folding>
-            <element signature="e#506#507#0" expanded="true" />
-            <element signature="e#539#540#0" expanded="true" />
-            <element signature="e#565#566#0" expanded="true" />
-            <element signature="e#598#599#0" expanded="true" />
-            <element signature="e#635#636#0" expanded="true" />
-            <element signature="e#668#669#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/client-java/chess.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-22549">
-          <caret line="73" column="0" selection-start-line="73" selection-start-column="0" selection-end-line="73" selection-end-column="0" />
+        <state relative-caret-position="2376">
+          <caret line="144" column="21" selection-start-line="144" selection-start-column="17" selection-end-line="144" selection-end-column="21" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1201#1202#0" expanded="true" />
-            <element signature="e#1224#1225#0" expanded="true" />
+            <element signature="e#1187#1188#0" expanded="true" />
+            <element signature="e#1210#1211#0" expanded="true" />
           </folding>
         </state>
       </provider>
