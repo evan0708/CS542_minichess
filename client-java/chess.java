@@ -7,15 +7,17 @@ import static java.lang.Math.max;
  * Edited by Shu-Ping Chu
  */
 public class chess {
-    private final static int row = 6;
-    private final static int column = 5;
-	private static char [][] board = new char[row][column];
-    private static char nextPlayer;                         // for next player
-    private static int move;                                // for total move
+    public final static int row = 6;
+    public final static int column = 5;
+    public final static int possiblePiece = 13;
+
+	public static char [][] board = new char[row][column];
+    public static char nextPlayer;                         // for next player
+    public static int move;                                // for total move
     private final static char dash = '-';
     private final static char newLine = '\n';
     private static Stack<String> storedMove = new Stack<String>();
-    private static Stack<String> stroedEntireBoard = new Stack<String>();
+    private static Stack<String> storedEntireBoard = new Stack<String>();
     private static Stack<Character> storedPiece = new Stack<Character>();
     private static int intervalTime = 6000;
     private static long endTime;
@@ -23,10 +25,9 @@ public class chess {
     private static long timecache;
     private static boolean timeMgmOn = false;
 
-    private static long zobristNum = 0;
-    private static long zobristBlackRandom = 0;
-    private static long zobristWhiteRandom = 0;
-    private static Random randomGenerator = new Random();
+    private static Transposition trans;
+    private static Bound bound;
+    private static Map<Long, Transposition> TTable = new HashMap<>();
 
     // New add!! chess constructor
     public chess() {
@@ -70,8 +71,11 @@ public class chess {
                 board[i][j] = tokens[i].charAt(j);
             }
         }
-        //display_board_state();
 
+        ZobristHashing.initializeZobrist();
+        trans = null;
+        bound = chess.Bound.EXACT;
+        //display_board_state();
 	}
 	
 	public static String boardGet() {
@@ -1101,7 +1105,7 @@ public class chess {
         // - note that it advised to do a sanity check of the supplied move
 
         // Stored entire board status before process
-        stroedEntireBoard.push(boardGet());
+        storedEntireBoard.push(boardGet());
 
         int srcColumn = mapColumnToIndex(charIn.charAt(0));
         int srcRow = mapRowToIndex(charIn.charAt(1));
@@ -1138,6 +1142,9 @@ public class chess {
 
         // Store each move
         storedMove.push(charIn);
+
+        // Update zobrist
+        ZobristHashing.zobristUpdate(charIn);
 	}
 
     public static int mapColumnToIndex(char y) {
@@ -1289,24 +1296,10 @@ public class chess {
 		return best;
 	}
 
-    public static void xorZobrist(long zobristNum) {
-        zobristNum = 0;
-        zobristBlackRandom = randomGenerator.nextLong();
-        zobristWhiteRandom = randomGenerator.nextLong();
 
-        if (nextPlayer == 'B') {
-            zobristNum ^= zobristBlackRandom;
-        } else if (nextPlayer == 'W') {
-            zobristNum ^= zobristWhiteRandom;
-        }
 
-        for(int i = 0; i < row; i++ ) {
-            for (int j = 0; j < column; j++) {
-               ;
-            }
-        }
-    }
     public static int alphabeta(int depth, int alpha, int beta) {
+        int oldAlpha = alpha;
 
         System.out.println("Alphabeta depth: " + depth);
         if (true == timeMgmOn) {
@@ -1343,7 +1336,25 @@ public class chess {
                 break;
             }
         }
+
+        // Store in the transposition table
+        if (score <= oldAlpha)
+            bound = Bound.UPPER;
+        else if (score >= beta)
+            bound = Bound.LOWER;
+        else
+            bound = Bound.EXACT;
+        trans = new Transposition(score, depth, bound);
+        TTable.put(ZobristHashing.getZobristNum(), trans);
+
+
         return score;
+    }
+
+    public enum Bound {
+        UPPER,
+        LOWER,
+        EXACT
     }
 	
 	public static void undo() {
@@ -1375,7 +1386,7 @@ public class chess {
         }
         board[srcRow][srcColumn] = undoPiece;
         */
-        String str = stroedEntireBoard.pop();
+        String str = storedEntireBoard.pop();
         boardSet(str);
 	}
 }

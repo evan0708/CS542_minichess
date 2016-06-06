@@ -10,7 +10,7 @@ public class main {
 			assert main.strName.length() > 2;
 			assert main.strName.length() < 16;
 			assert main.strName.indexOf(" ") == -1;
-            chess test = new chess();
+            //chess test = new chess();
             //test.display_board_state();
             /*
             String strIn = "1 W\nkqbnr\nppppp\n.....\n.....\nPPPPP\nRNBQK\n";
@@ -20,7 +20,7 @@ public class main {
             System.out.println(ex);
             */
 
-            test.reset();
+            //test.reset();
                           //abcde
             String strIn = "16 W\n" +
                            "b....\n" + //6

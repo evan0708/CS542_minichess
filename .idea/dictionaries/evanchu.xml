@@ -2,8 +2,10 @@
   <dictionary name="evanchu">
     <words>
       <w>alphabeta</w>
+      <w>stroed</w>
       <w>timecache</w>
       <w>timecounter</w>
+      <w>zobrist</w>
     </words>
   </dictionary>
 </component>
